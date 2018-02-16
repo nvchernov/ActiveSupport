@@ -2,6 +2,8 @@
     using System;
     using System.Globalization;
 
+    //TODO methods to check if string can be respresent as numeric
+
     /// <summary>
     /// Provides extension methods for <see cref="String"/> for conversion and checking to other types.
     /// </summary>
