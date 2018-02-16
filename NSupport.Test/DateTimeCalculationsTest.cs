@@ -293,5 +293,114 @@
             // with milliseconds
             Assert.Equal(new DateTime(2010, 1, 1, 0, 0, 0, 100), new DateTime(2010, 1, 1).Change(milliseconds: 100));
         }
+
+        [Fact]
+        public void Test_IsBlank_Nullable_with_null()
+        {
+            DateTime? dt = null;
+
+            Assert.Equal(true, dt.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsBlank_Nullable_default()
+        {
+            DateTime? dt = default(DateTime);
+
+            Assert.Equal(true, dt.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsBlank_Nullable_with_some_date()
+        {
+            DateTime? ints = new DateTime(1991, 12, 12);
+
+            Assert.Equal(false, ints.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsPresent_Nullable_with_null()
+        {
+            DateTime? dt = null;
+
+            Assert.Equal(true, dt.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsPresent_Nullable_default()
+        {
+            DateTime? dt = default(DateTime);
+
+            Assert.Equal(true, dt.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsPresent_Nullable_with_some_date()
+        {
+            DateTime? ints = new DateTime(1991, 12, 12);
+
+            Assert.Equal(false, ints.IsBlank());
+        }
+                
+        [Fact]
+        public void Test_IsBlank_default()
+        {
+            DateTime? dt = default(DateTime);
+
+            Assert.Equal(true, dt.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsBlank_with_some_date()
+        {
+            DateTime? ints = new DateTime(1991, 12, 12);
+
+            Assert.Equal(false, ints.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsPresent_default()
+        {
+            DateTime? dt = default(DateTime);
+
+            Assert.Equal(true, dt.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsPresent_with_some_date()
+        {
+            DateTime? ints = new DateTime(1991, 12, 12);
+
+            Assert.Equal(false, ints.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsInsideInterval_inside_interval()
+        {
+            DateTime leftPoint = new DateTime(2000, 1, 2);
+            DateTime rightPoint = new DateTime(2000, 1, 4);
+
+            DateTime middlePoint = new DateTime(2000, 1, 3);
+            DateTime behindLeftPoit = new DateTime(2000, 1, 1);
+            DateTime behindRightPoint = new DateTime(2000, 1, 5);
+
+            Assert.Equal(true, middlePoint.IsInsideInterval(leftPoint, rightPoint));
+            Assert.Equal(true, leftPoint.IsInsideInterval(leftPoint, rightPoint));
+            Assert.Equal(true, rightPoint.IsInsideInterval(leftPoint, rightPoint));
+        }
+
+        [Fact]
+        public void Test_IsInsideInterval_outside_interval()
+        {
+            DateTime leftPoint = new DateTime(2000, 1, 2);
+            DateTime rightPoint = new DateTime(2000, 1, 4);
+
+            DateTime middlePoint = new DateTime(2000, 1, 3);
+            DateTime behindLeftPoit = new DateTime(2000, 1, 1);
+            DateTime behindRightPoint = new DateTime(2000, 1, 5);
+
+            Assert.Equal(false, behindRightPoint.IsInsideInterval(leftPoint, rightPoint));
+            Assert.Equal(false, behindLeftPoit.IsInsideInterval(leftPoint, rightPoint));
+        }
     }
 }

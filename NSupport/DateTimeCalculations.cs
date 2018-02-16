@@ -284,5 +284,81 @@
 
             return new DateTime(y, m, d, h, min, s, ms); 
         }
+
+        /// <summary>
+        /// Check if <paramref name="source"/> is null or has no elements.
+        /// </summary>
+        /// <param name="source">An instance of <see cref="DateTime"/>.</param>
+        /// <returns></returns>
+        public static bool IsBlank(this DateTime? source) => source == null || source == default(DateTime);
+
+        /// <summary>
+        /// Check if <paramref name="source"/> is not null and has any element.
+        /// </summary>
+        /// <param name="source">An instance of <see cref="DateTime"/>.</param>
+        /// <returns></returns>
+        public static bool IsPresent(this DateTime? source) => source != null && source != default(DateTime);
+
+        /// <summary>
+        /// Check if <paramref name="source"/> is null or has no elements.
+        /// </summary>
+        /// <param name="source">An instance of <see cref="DateTime"/>.</param>
+        /// <returns></returns>
+        public static bool IsBlank(this DateTime source) => source == default(DateTime);
+
+        /// <summary>
+        /// Check if <paramref name="source"/> is not null and has any element.
+        /// </summary>
+        /// <param name="source">An instance of <see cref="DateTime"/>.</param>
+        /// <returns></returns>
+        public static bool IsPresent(this DateTime source) => source != default(DateTime);
+
+        /// <summary>
+        /// Check if <see cref="System.DateTime" /> is inside closed interval
+        /// </summary>
+        /// <param name="source">An instance of <see cref="DateTime"/>.</param>
+        /// <param name="left">Left bound of interval</param>
+        /// <param name="right">Right bound of interval</param>
+        /// <returns></returns>
+        public static bool IsInsideInterval(this DateTime source, DateTime left, DateTime right)
+        {
+            return left <= source && source <= right;
+        }
+
+        /// <summary>
+        /// Check if <see cref="System.DateTime" /> is inside open interval (segment)
+        /// </summary>
+        /// <param name="source">An instance of <see cref="DateTime"/>.</param>
+        /// <param name="left">Left bound of interval</param>
+        /// <param name="right">Right bound of interval</param>
+        /// <returns></returns>
+        public static bool IsInsideSegment(this DateTime source, DateTime left, DateTime right)
+        {
+            return left < source && source < right;
+        }
+
+        /// <summary>
+        /// Check if <see cref="System.DateTime" /> is inside closed interval
+        /// </summary>
+        /// <param name="source">An instance of <see cref="DateTime"/>.</param>
+        /// <param name="left">Left bound of interval</param>
+        /// <param name="right">Right bound of interval</param>
+        /// <returns></returns>
+        public static bool IsInsideInterval(this DateTime? source, DateTime? left, DateTime? right)
+        {
+            return left <= source && source <= right;
+        }
+
+        /// <summary>
+        /// Check if <see cref="System.DateTime" /> is inside open interval (segment)
+        /// </summary>
+        /// <param name="source">An instance of <see cref="DateTime"/>.</param>
+        /// <param name="left">Left bound of interval</param>
+        /// <param name="right">Right bound of interval</param>
+        /// <returns></returns>
+        public static bool IsInsideSegment(this DateTime? source, DateTime? left, DateTime? right)
+        {
+            return left < source && source < right;
+        }
     }
 }
