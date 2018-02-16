@@ -29,7 +29,27 @@
             Guard.ArgumentNotNull("source", source);
 
             return String.Format(provider, source, args);
+        }
 
+        /// <summary>
+        /// Get substring from index to index
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <returns></returns>
+        public static string Slice(this string source, int startIndex, int endIndex)
+        {
+            if (source == null)
+                return null;
+
+            if (source == string.Empty)
+                return source;
+
+            if (endIndex <= startIndex || startIndex < 0)
+                return string.Empty;
+            
+            return source.Substring(startIndex, endIndex - startIndex);
         }
     }
 }
