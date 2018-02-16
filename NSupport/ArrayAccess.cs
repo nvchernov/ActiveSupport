@@ -42,5 +42,22 @@
             source = new T[] { };            
             return source;
         }
+
+        /// <summary>
+        /// Check if <paramref name="source"/> is null or has no elements.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">An instance of <see cref="Array"/>.</param>
+        /// <returns></returns>
+        public static bool IsBlank<T>(this T[] source) => source == null || source.Length == 0;
+
+        /// <summary>
+        /// Check if <paramref name="source"/> is not null and has any element.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">An instance of <see cref="Array"/>.</param>
+        /// <returns></returns>
+        public static bool IsPresent<T>(this T[] source) => source != null && source.Length > 0;
+
     }
 }
