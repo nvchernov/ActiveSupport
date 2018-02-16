@@ -1,5 +1,6 @@
 ﻿namespace NSupport.Test {
     using System;
+    using System.Collections;
     using System.Linq;
     using Xunit;
 
@@ -97,5 +98,55 @@
 
             Assert.Equal(false, col.IsEmpty());
         }
+
+
+        [Fact]
+        public void Test_IsBlank_with_null()
+        {
+            int[] ints = null;
+
+            Assert.Equal(true, ints.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsBlank_with_no_elements()
+        {
+            IEnumerable ints = new int[0];
+
+            Assert.Equal(true, ints.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsBlank_with_elements()
+        {
+            IEnumerable ints = new int[1] { 1 };
+
+            Assert.Equal(false, ints.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsPresent_with_null()
+        {
+            IEnumerable ints = null;
+
+            Assert.Equal(false, ints.IsPresent());
+        }
+
+        [Fact]
+        public void Test_IsPresent_with_no_elements()
+        {
+            IEnumerable ints = new int[0];
+
+            Assert.Equal(false, ints.IsPresent());
+        }
+
+        [Fact]
+        public void Test_IsPresent_with_elements()
+        {
+            IEnumerable ints = new int[1] { 1 };
+
+            Assert.Equal(true, ints.IsPresent());
+        }
+
     }
 }
