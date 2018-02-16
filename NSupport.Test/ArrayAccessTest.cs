@@ -54,5 +54,54 @@
             Assert.NotEmpty(ints);
             Assert.Empty(values);
         }
+
+        [Fact]
+        public void Test_IsBlank_with_null()
+        {
+            int[] ints = null;
+
+            Assert.Equal(true, ints.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsBlank_with_no_elements()
+        {
+            int[] ints = new int[0];
+
+            Assert.Equal(true, ints.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsBlank_with_elements()
+        {
+            int[] ints = new int[1] { 1 };
+
+            Assert.Equal(false, ints.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsPresent_with_null()
+        {
+            int[] ints = null;
+
+            Assert.Equal(false, ints.IsPresent());
+        }
+
+        [Fact]
+        public void Test_IsPresent_with_no_elements()
+        {
+            int[] ints = new int[0];
+
+            Assert.Equal(false, ints.IsPresent());
+        }
+
+        [Fact]
+        public void Test_IsPresent_with_elements()
+        {
+            int[] ints = new int[1] { 1 };
+
+            Assert.Equal(true, ints.IsPresent());
+        }
+
     }
 }
