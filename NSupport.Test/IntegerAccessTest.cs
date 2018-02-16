@@ -5,8 +5,18 @@
     public class IntegerAccessTest {
         [Fact]
         public void Test_Integer_Times_with_null() {
-            Assert.DoesNotThrow(() => { 5.Times((Action)null); });
-            Assert.DoesNotThrow(() => { 5.Times((Action<int>)null); });
+
+            try
+            {
+                5.Times((Action)null);
+                5.Times((Action<int>)null);
+            }
+            catch(Exception ex)
+            {
+                Assert.True(false);
+            }
+
+            Assert.True(true);
         }
 
         [Fact]

@@ -27,5 +27,81 @@
                 (action ?? emptyIndexAction)(i);
             }
         }
+
+        /// <summary>
+        /// Check if <paramref name="source"/> is null or has no elements.
+        /// </summary>
+        /// <param name="source">An instance of <see cref="int"/>.</param>
+        /// <returns></returns>
+        public static bool IsBlank(this int? source) => source == null || source == default(int);
+
+        /// <summary>
+        /// Check if <paramref name="source"/> is not null and has any element.
+        /// </summary>
+        /// <param name="source">An instance of <see cref="int"/>.</param>
+        /// <returns></returns>
+        public static bool IsPresent(this int? source) => source != null && source != default(int);
+
+        /// <summary>
+        /// Check if <paramref name="source"/> is null or has no elements.
+        /// </summary>
+        /// <param name="source">An instance of <see cref="int"/>.</param>
+        /// <returns></returns>
+        public static bool IsBlank(this int source) => source == default(int);
+
+        /// <summary>
+        /// Check if <paramref name="source"/> is not null and has any element.
+        /// </summary>
+        /// <param name="source">An instance of <see cref="int"/>.</param>
+        /// <returns></returns>
+        public static bool IsPresent(this int source) => source != default(int);
+
+        /// <summary>
+        /// Check if int is inside closed interval
+        /// </summary>
+        /// <param name="source">An instance of <see cref="int"/>.</param>
+        /// <param name="left">Left bound of interval</param>
+        /// <param name="right">Right bound of interval</param>
+        /// <returns></returns>
+        public static bool IsInsideInterval(this int source, int left, int right)
+        {
+            return left <= source && source <= right;
+        }
+
+        /// <summary>
+        /// Check if int is inside open interval (segment)
+        /// </summary>
+        /// <param name="source">An instance of <see cref="int"/>.</param>
+        /// <param name="left">Left bound of interval</param>
+        /// <param name="right">Right bound of interval</param>
+        /// <returns></returns>
+        public static bool IsInsideSegment(this int source, int left, int right)
+        {
+            return left < source && source < right;
+        }
+
+        /// <summary>
+        /// Check if int is inside closed interval
+        /// </summary>
+        /// <param name="source">An instance of <see cref="int"/>.</param>
+        /// <param name="left">Left bound of interval</param>
+        /// <param name="right">Right bound of interval</param>
+        /// <returns></returns>
+        public static bool IsInsideInterval(this int? source, int? left, int? right)
+        {
+            return left <= source && source <= right;
+        }
+
+        /// <summary>
+        /// Check if int is inside open interval (segment)
+        /// </summary>
+        /// <param name="source">An instance of <see cref="int"/>.</param>
+        /// <param name="left">Left bound of interval</param>
+        /// <param name="right">Right bound of interval</param>
+        /// <returns></returns>
+        public static bool IsInsideSegment(this int? source, int? left, int? right)
+        {
+            return left < source && source < right;
+        }
     }
 }
