@@ -68,5 +68,56 @@ namespace NSupport.Test {
                 return ((IEnumerable)_values).GetEnumerator();
             }
         }
+
+
+        [Fact]
+        public void Test_IsBlank_with_null()
+        {
+            List<int> ints = null;
+
+            Assert.Equal(true, ints.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsBlank_with_no_elements()
+        {
+            List<int> ints = new List<int>();
+
+            Assert.Equal(true, ints.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsBlank_with_elements()
+        {
+            List<int> ints = new List<int>() { 1 };
+
+            Assert.Equal(false, ints.IsBlank());
+        }
+
+        [Fact]
+        public void Test_IsPresent_with_null()
+        {
+            List<int> ints = null;
+
+            Assert.Equal(false, ints.IsPresent());
+        }
+
+        [Fact]
+        public void Test_IsPresent_with_no_elements()
+        {
+            List<int> ints = new List<int>();
+
+            Assert.Equal(false, ints.IsPresent());
+        }
+
+        [Fact]
+        public void Test_IsPresent_with_elements()
+        {
+            List<int> ints = new List<int>() { 1 };
+
+            Assert.Equal(true, ints.IsPresent());
+        }
+
+
     }
 }
