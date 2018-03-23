@@ -11,3 +11,4 @@ packages/
 *.crunchsolution.cache
 *.ncrunchsolution
 *.ncrunchproject
+/.vs/
