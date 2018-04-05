@@ -6,7 +6,7 @@
         [Fact]
         public void Test_IndexOf_with_null() {
             int[] nullArray = null;
-            Assert.Throws<ArgumentNullException>(() => nullArray.IndexOf(1));
+            Assert.Equal(-1, nullArray.IndexOf(1));
         }
 
         [Fact]
@@ -24,7 +24,7 @@
         [Fact]
         public void Test_LastIndexOf_with_null() {
             int[] nullArray = null;
-            Assert.Throws<ArgumentNullException>(() => nullArray.LastIndexOf(1));
+            Assert.Equal(-1, nullArray.LastIndexOf(1));
         }
 
         [Fact]
