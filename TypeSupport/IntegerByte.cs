@@ -1,4 +1,4 @@
-﻿namespace NSupport {
+﻿namespace TypeSupport {
     /// <summary>
     /// Provides extension methods for <see cref="int"/> for byte/kilobyte/etc conversion.
     /// </summary>

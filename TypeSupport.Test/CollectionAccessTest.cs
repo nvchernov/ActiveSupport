@@ -5,7 +5,7 @@ using System.Text;
 using Xunit;
 using System.Collections;
 
-namespace NSupport.Test {
+namespace TypeSupport.Test {
     public class CollectionAccessTest {
         [Fact]
         public void Test_AddRange_with_null_source() {

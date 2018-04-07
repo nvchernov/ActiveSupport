@@ -1,4 +1,4 @@
-﻿namespace NSupport.Test {
+﻿namespace TypeSupport.Test {
     using System.IO;
     using System.Text;
     using Xunit;

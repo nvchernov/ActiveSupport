@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using NSupport;
+using TypeSupport;
 
-namespace NSupport.Test
+namespace TypeSupport.Test
 {
     public class GuidAccessTests
     {

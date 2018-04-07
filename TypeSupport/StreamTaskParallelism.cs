@@ -1,4 +1,4 @@
-﻿namespace NSupport {
+﻿namespace TypeSupport {
     using System.IO;
     using System.Threading.Tasks;
 

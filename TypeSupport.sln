@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSupport.Test", "NSupport.Test\NSupport.Test.csproj", "{B7347DB4-AA88-4F6C-8B15-B2E5291E436A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeSupport.Test", "TypeSupport.Test\TypeSupport.Test.csproj", "{B7347DB4-AA88-4F6C-8B15-B2E5291E436A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B6614D9-850C-4C1E-B716-90206102F372}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D383D1
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeSupport", "TypeSupport\TypeSupport.csproj", "{D8DC2FDF-E0D6-4CAA-B122-02022C3F95E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeSupport", "TypeSupport\TypeSupport.csproj", "{D8DC2FDF-E0D6-4CAA-B122-02022C3F95E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

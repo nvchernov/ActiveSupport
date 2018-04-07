@@ -1,4 +1,4 @@
-﻿namespace NSupport
+﻿namespace TypeSupport
 {
     using System;
 
@@ -38,7 +38,7 @@
             return !string.IsNullOrWhiteSpace(source);
         }
 
-        // TODO make namesapce (like NSupport.Neworking) for this type of operations
+        // TODO make namesapce (like TypeSupport.Neworking) for this type of operations
         /// <summary>
         /// Encode string as url string.
         /// </summary>

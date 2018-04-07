@@ -1,4 +1,4 @@
-﻿namespace NSupport {
+﻿namespace TypeSupport {
     using System;
     using System.Globalization;
 
