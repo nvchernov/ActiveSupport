@@ -7,7 +7,7 @@
         [Fact]
         public void Test_GetResponseAsync() {
             // Create a request for the URL. 		
-            var request = WebRequest.Create("http://www.contoso.com/default.html");
+            var request = WebRequest.Create("https://www.google.com");
 
             request.GetResponseAsync()
                         .ContinueWith(t => {
@@ -24,8 +24,8 @@
         [Fact]
         public void Test_GetRequestStreamAsync() {
             // Create a request for the URL. 		
-            var request = WebRequest.Create("http://www.contoso.com/default.html");
-            request.Method = "POST";
+            var request = WebRequest.Create("https://www.google.com");
+            request.Method = "GET";
             request.GetRequestStreamAsync()
                         .ContinueWith(t => {
                             Assert.NotNull(t.Result);

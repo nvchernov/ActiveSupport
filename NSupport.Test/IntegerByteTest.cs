@@ -29,27 +29,27 @@
 
         [Fact]
         public void Test_MegaBytes() {
-            Assert.Equal(10L * 1024 * 1024, 10.Megabytes());
+            Assert.Equal(10L * 1024L * 1024L, 10.Megabytes());
         }
 
         [Fact]
         public void Test_GigaByte() {
-            Assert.Equal(1024L * 1024 * 1024, 1.Gigabyte());
+            Assert.Equal(1024L * 1024L * 1024L, 1.Gigabyte());
         }
 
         [Fact]
         public void Test_GigaBytes() {
-            Assert.Equal(10L * 1024 * 1024 * 1024, 10.Gigabytes());
+            Assert.Equal(10L * 1024L * 1024L * 1024L, 10.Gigabytes());
         }
 
         [Fact]
         public void Test_TeraByte() {
-            Assert.Equal(1024L * 1024 * 1024 * 1024, 1.Terabyte());
+            Assert.Equal(1024L * 1024L * 1024L * 1024L, 1.Terabyte());
         }
 
         [Fact]
         public void Test_TeraBytes() {
-            Assert.Equal(10L * 1024 * 1024 * 1024 * 1024, 10.Terabytes());
+            Assert.Equal(10L * 1024L * 1024L * 1024L * 1024L, 10.Terabytes());
         }
     }
 }

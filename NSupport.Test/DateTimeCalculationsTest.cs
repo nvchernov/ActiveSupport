@@ -1,5 +1,6 @@
 ﻿namespace NSupport.Test {
     using System;
+    using System.Globalization;
     using Xunit;
 
     public class DateTimeCalculationsTest {
@@ -76,9 +77,13 @@
 
         [Fact]
         public void Test_BeginningOfWeek() {
-            //TODO Russia has monday as first day of week, but USA has sunday as week first day
-            //this test will fail if cureent culture is Russia
-            Assert.Equal(new DateTime(2011, 6, 12, 0, 0, 0), new DateTime(2011, 6, 14, 10, 0, 0).BeginningOfWeek());
+
+            if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Monday)
+                Assert.Equal(new DateTime(2011, 6, 13, 0, 0, 0), new DateTime(2011, 6, 14, 10, 0, 0).BeginningOfWeek());
+            else if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Sunday)
+                Assert.Equal(new DateTime(2011, 6, 12, 0, 0, 0), new DateTime(2011, 6, 14, 10, 0, 0).BeginningOfWeek());
+            else
+                Assert.True(false);
         }
 
         [Fact]
@@ -96,7 +101,13 @@
 
         [Fact]
         public void Test_EndOfWeek() {
-            Assert.Equal(new DateTime(2011, 6, 18, 23, 59, 59), new DateTime(2011, 6, 14, 10, 0, 0).EndOfWeek());
+
+            if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Monday)
+                Assert.Equal(new DateTime(2011, 6, 19, 23, 59, 59), new DateTime(2011, 6, 14, 10, 0, 0).EndOfWeek());
+            else if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Sunday)
+                Assert.Equal(new DateTime(2011, 6, 18, 23, 59, 59), new DateTime(2011, 6, 14, 10, 0, 0).EndOfWeek());
+            else
+                Assert.True(false);
         }
 
         [Fact]

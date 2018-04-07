@@ -45,7 +45,7 @@
         /// <param name="source">A <see cref="int"/> instance.</param>
         /// <returns>A megabyte.</returns>
         public static long Megabyte(this int source) {
-            return source * 1024 * 1024;
+            return source * 1024L * 1024L;
         }
 
         /// <summary>
@@ -54,7 +54,7 @@
         /// <param name="source">A <see cref="int"/> instance.</param>
         /// <returns>The megabytes in number.</returns>
         public static long Megabytes(this int source) {
-            return source * 1024 * 1024;
+            return source * 1024L * 1024L;
         }
 
         /// <summary>
@@ -63,7 +63,7 @@
         /// <param name="source">A <see cref="int"/> instance.</param>
         /// <returns>A gigabyte.</returns>
         public static long Gigabyte(this int source) {
-            return source * 1024 * 1024 * 1024;
+            return source * 1024L * 1024L * 1024L;
         }
 
         /// <summary>
@@ -72,7 +72,7 @@
         /// <param name="source">A <see cref="int"/> instance.</param>
         /// <returns>The gigabytes in number.</returns>
         public static long Gigabytes(this int source) {
-            return source * 1024 * 1024 * 1024;
+            return source * 1024L * 1024L * 1024L;
         }
 
         /// <summary>
@@ -81,7 +81,7 @@
         /// <param name="source">A <see cref="int"/> instance.</param>
         /// <returns>A terabyte.</returns>
         public static long Terabyte(this int source) {
-            return source * 1024 * 1024 * 1024 * 1024;
+            return source * 1024L * 1024L * 1024L * 1024L;
         }
 
         /// <summary>
@@ -90,7 +90,7 @@
         /// <param name="source">A <see cref="int"/> instance.</param>
         /// <returns>The terabytes in number.</returns>
         public static long Terabytes(this int source) {
-            return source * 1024 * 1024 * 1024 * 1024;
+            return source * 1024L * 1024L * 1024L * 1024L;
         }
     }
 }

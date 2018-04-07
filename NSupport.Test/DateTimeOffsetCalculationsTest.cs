@@ -1,5 +1,6 @@
 ﻿namespace NSupport.Test {
     using System;
+    using System.Globalization;
     using Xunit;
 
     public class DateTimeOffsetCalculationsTest {
@@ -76,7 +77,13 @@
 
         [Fact]
         public void Test_BeginningOfWeek() {
-            Assert.Equal(new DateTimeOffset(2011, 6, 12, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).BeginningOfWeek());
+
+            if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Monday)
+                Assert.Equal(new DateTimeOffset(2011, 6, 13, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).BeginningOfWeek());
+            else if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Sunday)
+                Assert.Equal(new DateTimeOffset(2011, 6, 12, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).BeginningOfWeek());
+            else
+                Assert.True(false);            
         }
 
         [Fact]
@@ -94,7 +101,13 @@
 
         [Fact]
         public void Test_EndOfWeek() {
-            Assert.Equal(new DateTimeOffset(2011, 6, 18, 23, 59, 59, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).EndOfWeek());
+
+            if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Monday)
+                Assert.Equal(new DateTimeOffset(2011, 6, 19, 23, 59, 59, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).EndOfWeek());
+            else if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Sunday)
+                Assert.Equal(new DateTimeOffset(2011, 6, 18, 23, 59, 59, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).EndOfWeek());
+            else
+                Assert.True(false);
         }
 
         [Fact]

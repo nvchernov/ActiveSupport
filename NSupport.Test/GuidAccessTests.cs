@@ -37,8 +37,8 @@ namespace NSupport.Test
         {
             Guid? guid = Guid.Parse(GUID_TEST_VALUE);
 
-            Assert.True(guid.IsBlank());
-            Assert.False(guid.IsPresent());
+            Assert.False(guid.IsBlank());
+            Assert.True(guid.IsPresent());
         }
 
 
