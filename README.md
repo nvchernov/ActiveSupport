@@ -1,28 +1,14 @@
-# NSupport
+# TypeSupport
 
-A .Net port of ActiveSupport library of Ruby on Rails. The goal is to extend Base Class Library for Common Usage with human readable syntax.
+A .Net library that makes your code beautiful, explicit and simple. Goal of a project - increase readability of code.
 
-# Installation
-
-You can use NSupport by using either _Nuget_ **OR** _DLL download_.
-
-### Nuget
-> Install-Package NSupport
-
-More information about nuget package at http://www.nuget.org/List/Packages/NSupport.
-
-### DLL download
-You can download the [latest released DLL](https://github.com/downloads/jittuu/NSupport/NSupport%20v1.3.1.zip) and add reference to your project.
-
-# Usage
-
-**NSupport** extends the BCL by adding extension methods, so you need to add the using reference to your code.
+Inspired by python [philosophy](https://www.python.org/dev/peps/pep-0020/) and ActiveSupport (Ruby on Rails).
 
 ```c#
-    using NSupport;
+    using TypeSupport;
 ```
 
-NSupport extends [DateTime](http://msdn.microsoft.com/en-us/library/system.datetime.aspx) and [DateTimeOffset](http://msdn.microsoft.com/en-us/library/system.datetimeoffset.aspx) to allow you to write as below and more:
+TypeSupport extends [DateTime](http://msdn.microsoft.com/en-us/library/system.datetime.aspx) and [DateTimeOffset](http://msdn.microsoft.com/en-us/library/system.datetimeoffset.aspx) to allow you to write as below and more:
 
 ```c#
 	var june18 = new DateTime(2011,6,18);
@@ -69,7 +55,7 @@ it also extends [Integer](http://msdn.microsoft.com/en-us/library/system.int32.a
 	});
 ```
 
-when [Integer](http://msdn.microsoft.com/en-us/library/system.int32.aspx) loves [TimeSpan](http://msdn.microsoft.com/en-us/library/system.timespan.aspx)
+Readable conversation [Integer](http://msdn.microsoft.com/en-us/library/system.int32.aspx) to [TimeSpan](http://msdn.microsoft.com/en-us/library/system.timespan.aspx)
 
 ```c#
 	1.Hour(); // Timespan of 1 hour
@@ -79,29 +65,11 @@ when [Integer](http://msdn.microsoft.com/en-us/library/system.int32.aspx) loves 
 	10.Hours().Since(new DateTime(2011,6,18)); // 2011/06/18 10:00:00
 ```
 
-converting **string** to _numbers_. 
-
-```c#
-	"10".ToInt32(); // convert to int 10
-	"10,000".ToDecimal(); // convert to decimal 10000 
-	
-	"5".AsInt32(); // convert to int? 5
-	"notValidNumber".AsInt32(); // return null
-	
-	var i = "notValidNumber".AsInt32() ?? -1; // i will have -1 (no more int.TryParse :) )	
-```
-
-formatting **string**.
-
-```c#
-	"{0} is {1} years old".FormatWith("Michael", 23); // Michael is 23 years old.	
-```
-
 securing **text**
 
 ```c#
   var password = "awesomeSecretPassword";
-  var salt = "123jfe3EJV24098EC"; // or Guid.NewGuid().ToString("N");
+  var salt = "123jfe3EJV24098EC";
   
   // hash password, so that no one can retrieve password
   var digestPassword = password.ToHashString(salt);
@@ -115,13 +83,3 @@ securing **text**
   // decrypt to original
 	var decryptedText = encryptedText.Decrypt(secertKey); // decryptedText == importantText
 ```
-
-# CONTRIBUTE
-
-If you find any bug, please file a bug in [Github Issue](https://github.com/jittuu/NSupport/issues).
-
-If you have any idea for extending BCL or any doubt in using NSupport, please post message in [discussion board](http://groups.google.com/group/nsupport-lib).
-
-If you want to hack NSupport, start by forking my repo on GitHub:
-
-https://github.com/jittuu/NSupport
