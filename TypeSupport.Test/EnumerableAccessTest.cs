@@ -1,6 +1,7 @@
 ﻿namespace TypeSupport.Test {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
     using Xunit;
 
@@ -146,6 +147,54 @@
             IEnumerable ints = new int[1] { 1 };
 
             Assert.Equal(true, ints.IsPresent());
+        }
+
+        [Fact]
+        public void Test_IndexOf_T_with_existed_element()
+        {
+            IEnumerable<int> ints = new List<int>() { 1, 2, 3, 4 };
+
+            Assert.Equal(1, ints.IndexOf(x => x == 2));
+        }
+
+        [Fact]
+        public void Test_IndexOf_T_with_not_existed_element()
+        {
+            IEnumerable<int> ints = new List<int>() { 1, 2, 3, 4 };
+
+            Assert.Equal(-1, ints.IndexOf(x => x == 5));
+        }
+
+        [Fact]
+        public void Test_IndexOf_T_with_null()
+        {
+            IEnumerable<int> ints = null;
+
+            Assert.Equal(-1, ints.IndexOf(x => x == 5));
+        }
+
+        [Fact]
+        public void Test_IndexOf_with_existed_element()
+        {
+            IEnumerable ints = new List<int>() { 1, 2, 3, 4 };
+
+            Assert.Equal(1, ints.IndexOf(x => (int)x == 2));
+        }
+
+        [Fact]
+        public void Test_IndexOf_with_not_existed_element()
+        {
+            IEnumerable ints = new List<int>() { 1, 2, 3, 4 };
+
+            Assert.Equal(-1, ints.IndexOf(x => (int)x == 5));
+        }
+
+        [Fact]
+        public void Test_IndexOf_with_null()
+        {
+            IEnumerable ints = null;
+
+            Assert.Equal(-1, ints.IndexOf(x => (int)x == 5));
         }
 
     }
