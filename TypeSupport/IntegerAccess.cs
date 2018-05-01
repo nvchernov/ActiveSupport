@@ -122,5 +122,20 @@
         {
             return left < source && source < right;
         }
+
+        /// <summary>
+        /// Check if <paramref name="source"/> is near <paramref name="value"/> with <paramref name="epsilon"/> approximation
+        /// </summary>
+        /// <param name="source">Source value to check</param>
+        /// <param name="value">Value to check</param>
+        /// <param name="epsilon">Approximation</param>
+        /// <example>
+        /// 10.FuzzyEqual(11, 2) === true
+        /// 10.FuzzyEqual(15, 2) === false
+        /// </example>
+        public static bool FuzzyEqual(this int source, int value, int epsilon)
+        {
+            return Math.Abs(source - value) <= epsilon;
+        }
     }
 }

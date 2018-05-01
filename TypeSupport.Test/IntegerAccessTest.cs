@@ -34,5 +34,15 @@
                 index++;
             });
         }
+
+        [Fact]
+        public void Test_FuzzyEqual_inside_range() {
+            Assert.True(3.FuzzyEqual(2, 1));
+        }
+
+        [Fact]
+        public void Test_FuzzyEqual_outside_range() {
+            Assert.False(4.FuzzyEqual(2, 1));
+        }
     }
 }
