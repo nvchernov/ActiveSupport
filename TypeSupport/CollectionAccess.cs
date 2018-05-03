@@ -1,5 +1,6 @@
 ﻿namespace TypeSupport
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
 
@@ -54,5 +55,30 @@
         {
             return source != null && source.Count > 0;
         }
+
+        private static Random rnd = new Random();
+
+        /// <summary>
+        /// Randomize elements order by using Fisher–Yates algorithm
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">An instance of <see cref="IList"/>.</param>
+        /// <returns></returns>
+        public static void Shuffle<T>(this IList<T> source)
+        {
+            if (source == null)
+                return;
+
+            int n = source.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rnd.Next(n + 1);
+                T value = source[k];
+                source[k] = source[n];
+                source[n] = value;
+            }
+        }
+    
     }
 }
