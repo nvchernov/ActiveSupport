@@ -136,11 +136,12 @@ namespace TypeSupport.Test
         [Fact]
         public void Test_Shuffle()
         {
-            List<int> ints = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            var hashCodeBeforeSort = ints.GetHashCode();
-            ints.Shuffle();
-            
-            Assert.NotEqual(hashCodeBeforeSort, ints.GetHashCode());
+            List<int> randomizedIntsList = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            randomizedIntsList.Shuffle();
+
+            List<int> IntsList = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+            Assert.NotEqual(IntsList, randomizedIntsList);
         }
 
 
