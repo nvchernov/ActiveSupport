@@ -75,5 +75,54 @@
             var encoded = HttpUtility.UrlEncode(value).Replace("+", "%20");
             Assert.Equal(value, encoded.UrlDecode(), StringComparer.OrdinalIgnoreCase);            
         }
+
+        [Fact]
+        public void Test_Squish_long_string_with_double_whitespaces()
+        {
+            string expected = 
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco";
+
+            string doubleSpacesString = "    Lorem   ipsum dolor" +
+                "    sit amet, consectetur adipiscing elit, " +
+                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.    Ut " +
+                @" enim ad minim 
+
+
+veniam, quis nostrud exercitation ullamco  
+
+ ";
+            Assert.Equal(expected, doubleSpacesString.Squish());
+        }
+
+        [Fact]
+        public void Test_Squish_with_single_whitespace()
+        {
+            string expected = " ".Squish();
+
+            string actual = string.Empty;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Test_Squish_with_many_whitespaces()
+        {
+            string expected = "     ".Squish();
+
+            string actual = string.Empty;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Test_Squish_with_null()
+        {
+            string expected = (null as string).Squish();
+
+            string actual = null;
+
+            Assert.Equal(expected, actual);
+        }
+
     }
 }
