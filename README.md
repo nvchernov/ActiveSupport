@@ -65,6 +65,23 @@ Readable conversation [Integer](http://msdn.microsoft.com/en-us/library/system.i
 	10.Hours().Since(new DateTime(2011,6,18)); // 2011/06/18 10:00:00
 ```
 
+Active support methods ```blank?``` and ```present?```  that makes you code more readable
+
+```c#
+	if(bid.Transactions != null && bid.Transactions.Count > 0)
+	//vs
+	if(bid.Transactions.IsPresent())
+
+	//dates - e.g. book.createdAt is "DateTime?"
+	if(bid.CreatedAt != null && bid.CreatedAt != default(DateTime))
+	//vs
+	if(bid.CreatedAt.IsPresent())
+```
+
+IsPresent() - means that your varialble has some value, e.g. list has minimum 1 element and list is not null
+
+IsBlank() - !IsPresent()
+
 securing **text**
 
 ```c#
