@@ -1,17 +1,20 @@
-﻿namespace TypeSupport.Test {
+﻿namespace TypeSupport.Test
+{
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using Xunit;
 
-    public class StringToNumberConversionTest {
+    public class StringToNumberConversionTest
+    {
 
         #region IsNumber tests
 
         private readonly string point = NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
 
         [Fact]
-        public void Test_IsNumber_with_null() {
+        public void Test_IsNumber_with_null()
+        {
             string nullString = null;
 
             Assert.Equal(false, nullString.IsNumber());
@@ -20,8 +23,8 @@
         [Fact]
         public void Test_IsNumber_for_valid_strings()
         {
-            
-            var validValues = new string[] 
+
+            var validValues = new string[]
             {
                 int.MaxValue.ToString(),
                 int.MinValue.ToString(),
@@ -57,9 +60,9 @@
                 $"-1{point}1e+1",
             };
 
-            foreach (var value in validValues) 
+            foreach (var value in validValues)
                 Assert.True(value.IsNumber(), string.Format($"'{value}' should be valid number but it is not"));
-            
+
         }
 
         [Fact]
@@ -120,7 +123,8 @@
 
 
         [Fact]
-        public void Test_ToInt32_for_null_string() {
+        public void Test_ToInt32_for_null_string()
+        {
             string nullString = null;
             var ex = Assert.Throws<ArgumentNullException>(() => nullString.ToInt32());
 
@@ -128,36 +132,41 @@
         }
 
         [Fact]
-        public void Test_ToInt32_for_valid_strings() {
-            var validValues = new Dictionary<string, int>() { 
-                { "1234", 1234 }, 
-                {"  1234", 1234 }, 
-                {"1234   ", 1234 }, 
+        public void Test_ToInt32_for_valid_strings()
+        {
+            var validValues = new Dictionary<string, int>() {
+                { "1234", 1234 },
+                {"  1234", 1234 },
+                {"1234   ", 1234 },
                 {"   1234  ", 1234},
-                {"+1234", 1234}, 
+                {"+1234", 1234},
                 {"  -1234  ", -1234}
             };
 
-            foreach (var kv in validValues) 
+            foreach (var kv in validValues)
                 Assert.Equal(kv.Value, kv.Key.ToInt32());
-            
+
         }
 
         [Fact]
-        public void Test_ToInt32_for_invalid_strings() {            
-            var invalidValues = new string[] { 
+        public void Test_ToInt32_for_invalid_strings()
+        {
+            var invalidValues = new string[] {
                 "1,000", "  1234.", "1234.32   ", "   $1234  "
             };
 
-            foreach (var value in invalidValues) {
-                Assert.Throws<FormatException>(() => {
+            foreach (var value in invalidValues)
+            {
+                Assert.Throws<FormatException>(() =>
+                {
                     value.ToInt32();
                 });
             }
         }
 
         [Fact]
-        public void Test_ToInt32_with_NumberStyles_for_null_string() {
+        public void Test_ToInt32_with_NumberStyles_for_null_string()
+        {
             string nullString = null;
             var ex = Assert.Throws<ArgumentNullException>(() => nullString.ToInt32(NumberStyles.Integer));
 
@@ -165,82 +174,94 @@
         }
 
         [Fact]
-        public void Test_ToInt32_with_NumberStyles_for_valid_strings() {
-            var validValues = new Tuple<string, NumberStyles, int>[]{ 
-                new Tuple<string, NumberStyles, int>("123.0", NumberStyles.AllowDecimalPoint, 
+        public void Test_ToInt32_with_NumberStyles_for_valid_strings()
+        {
+            var validValues = new Tuple<string, NumberStyles, int>[]{
+                new Tuple<string, NumberStyles, int>("123.0", NumberStyles.AllowDecimalPoint,
                     123),
-                new Tuple<string, NumberStyles, int>("$123", NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, int>("$123", NumberStyles.AllowCurrencySymbol,
                     123),
-                new Tuple<string, NumberStyles, int>("$123.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, int>("$123.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol,
                     123),
             };
 
-            foreach (var value in validValues) {
+            foreach (var value in validValues)
+            {
                 Assert.Equal(value.Item3, value.Item1.ToInt32(value.Item2));
             }
         }
 
         [Fact]
-        public void Test_ToInt32_with_NumberStyles_for_invalid_strings() {
-            var invalidValues = new Dictionary<string, NumberStyles> { 
+        public void Test_ToInt32_with_NumberStyles_for_invalid_strings()
+        {
+            var invalidValues = new Dictionary<string, NumberStyles> {
                 { "$123.0", NumberStyles.AllowDecimalPoint },
                 { "123.0", NumberStyles.AllowCurrencySymbol },
                 { "+123.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol }
             };
 
-            foreach (var kv in invalidValues) {
-                Assert.Throws<FormatException>(() => {
+            foreach (var kv in invalidValues)
+            {
+                Assert.Throws<FormatException>(() =>
+                {
                     kv.Key.ToInt32(kv.Value);
                 });
             }
         }
 
         [Fact]
-        public void Test_AsInt32_for_valid_strings() {
-            var validValues = new Dictionary<string, int>() { 
-                { "1234", 1234 }, 
-                {"  1234", 1234 }, 
-                {"1234   ", 1234 }, 
+        public void Test_AsInt32_for_valid_strings()
+        {
+            var validValues = new Dictionary<string, int>() {
+                { "1234", 1234 },
+                {"  1234", 1234 },
+                {"1234   ", 1234 },
                 {"   1234  ", 1234},
-                {"+1234", 1234}, 
+                {"+1234", 1234},
                 {"  -1234  ", -1234}
             };
 
-            foreach (var kv in validValues) {
+            foreach (var kv in validValues)
+            {
                 Assert.Equal(kv.Value, kv.Key.AsInt32());
             }
         }
 
         [Fact]
-        public void Test_AsInt32_for_invalid_strings() {
-            var invalidValues = new string[] { 
+        public void Test_AsInt32_for_invalid_strings()
+        {
+            var invalidValues = new string[] {
                 null, "1,000", "  1234.", "1234.32   ", "   $1234  "
             };
 
-            foreach (var value in invalidValues) {
+            foreach (var value in invalidValues)
+            {
                 Assert.Null(value.AsInt32());
             }
         }
 
         [Fact]
-        public void Test_AsInt32_with_NumberStyles_for_valid_strings() {
-            var validValues = new Tuple<string, NumberStyles, int>[]{ 
-                new Tuple<string, NumberStyles, int>("123.0", NumberStyles.AllowDecimalPoint, 
+        public void Test_AsInt32_with_NumberStyles_for_valid_strings()
+        {
+            var validValues = new Tuple<string, NumberStyles, int>[]{
+                new Tuple<string, NumberStyles, int>("123.0", NumberStyles.AllowDecimalPoint,
                     123),
-                new Tuple<string, NumberStyles, int>("$123", NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, int>("$123", NumberStyles.AllowCurrencySymbol,
                     123),
-                new Tuple<string, NumberStyles, int>("$123.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, int>("$123.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol,
                     123),
             };
 
-            foreach (var value in validValues) {
+            foreach (var value in validValues)
+            {
                 Assert.Equal(value.Item3, value.Item1.AsInt32(value.Item2));
             }
         }
 
         [Fact]
-        public void Test_AsInt32_with_NumberStyles_for_invalid_strings() {
-            var invalidValues = new Dictionary<string, NumberStyles> { 
+        public void Test_AsInt32_with_NumberStyles_for_invalid_strings()
+        {
+            var invalidValues = new Dictionary<string, NumberStyles> {
                 { "$123.0", NumberStyles.AllowDecimalPoint },
                 { "123.0", NumberStyles.AllowCurrencySymbol },
                 { "+123.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol }
@@ -249,13 +270,15 @@
             string nullString = null;
             Assert.Null(nullString.AsInt32(NumberStyles.AllowDecimalPoint));
 
-            foreach (var kv in invalidValues) {                
+            foreach (var kv in invalidValues)
+            {
                 Assert.Null(kv.Key.AsInt32(kv.Value));
             }
         }
 
         [Fact]
-        public void Test_ToInt64_for_null_string() {
+        public void Test_ToInt64_for_null_string()
+        {
             string nullString = null;
             var ex = Assert.Throws<ArgumentNullException>(() => nullString.ToInt64());
 
@@ -263,37 +286,43 @@
         }
 
         [Fact]
-        public void Test_ToInt64_for_valid_strings() {
-            var validValues = new Dictionary<string, long>() { 
-                { "1234", 1234 }, 
-                {"  1234", 1234 }, 
-                {"1234   ", 1234 }, 
+        public void Test_ToInt64_for_valid_strings()
+        {
+            var validValues = new Dictionary<string, long>() {
+                { "1234", 1234 },
+                {"  1234", 1234 },
+                {"1234   ", 1234 },
                 {"   1234  ", 1234},
-                {"+1234", 1234}, 
+                {"+1234", 1234},
                 {"  -1234  ", -1234},
                 {"9223372036854", 9223372036854}
             };
 
-            foreach (var kv in validValues) {
+            foreach (var kv in validValues)
+            {
                 Assert.Equal(kv.Value, kv.Key.ToInt64());
             }
         }
 
         [Fact]
-        public void Test_ToInt64_for_invalid_strings() {
-            var invalidValues = new string[] { 
+        public void Test_ToInt64_for_invalid_strings()
+        {
+            var invalidValues = new string[] {
                 "1,000", "  1234.", "1234.32   ", "   $1234  "
             };
 
-            foreach (var value in invalidValues) {
-                Assert.Throws<FormatException>(() => {
+            foreach (var value in invalidValues)
+            {
+                Assert.Throws<FormatException>(() =>
+                {
                     value.ToInt64();
                 });
             }
         }
 
         [Fact]
-        public void Test_ToInt64_with_NumberStyles_for_null_string() {
+        public void Test_ToInt64_with_NumberStyles_for_null_string()
+        {
             string nullString = null;
             var ex = Assert.Throws<ArgumentNullException>(() => nullString.ToInt64(NumberStyles.AllowDecimalPoint));
 
@@ -301,82 +330,94 @@
         }
 
         [Fact]
-        public void Test_ToInt64_with_NumberStyles_for_valid_strings() {
-            var validValues = new Tuple<string, NumberStyles, long>[]{ 
-                new Tuple<string, NumberStyles, long>("123.0", NumberStyles.AllowDecimalPoint, 
+        public void Test_ToInt64_with_NumberStyles_for_valid_strings()
+        {
+            var validValues = new Tuple<string, NumberStyles, long>[]{
+                new Tuple<string, NumberStyles, long>("123.0", NumberStyles.AllowDecimalPoint,
                     123),
-                new Tuple<string, NumberStyles, long>("$9223372036854", NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, long>("$9223372036854", NumberStyles.AllowCurrencySymbol,
                     9223372036854),
-                new Tuple<string, NumberStyles, long>("$123.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, long>("$123.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol,
                     123),
             };
 
-            foreach (var value in validValues) {
+            foreach (var value in validValues)
+            {
                 Assert.Equal(value.Item3, value.Item1.ToInt64(value.Item2));
             }
         }
 
         [Fact]
-        public void Test_ToInt64_with_NumberStyles_for_invalid_strings() {
-            var invalidValues = new Dictionary<string, NumberStyles> { 
+        public void Test_ToInt64_with_NumberStyles_for_invalid_strings()
+        {
+            var invalidValues = new Dictionary<string, NumberStyles> {
                 { "$123.0", NumberStyles.AllowDecimalPoint },
                 { "123.0", NumberStyles.AllowCurrencySymbol },
                 { "+9223372036854.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol }
             };
 
-            foreach (var kv in invalidValues) {
-                Assert.Throws<FormatException>(() => {
+            foreach (var kv in invalidValues)
+            {
+                Assert.Throws<FormatException>(() =>
+                {
                     kv.Key.ToInt64(kv.Value);
                 });
             }
         }
 
         [Fact]
-        public void Test_AsInt64_for_valid_strings() {
-            var validValues = new Dictionary<string, long>() { 
-                { "1234", 1234 }, 
-                {"  1234", 1234 }, 
-                {"1234   ", 1234 }, 
+        public void Test_AsInt64_for_valid_strings()
+        {
+            var validValues = new Dictionary<string, long>() {
+                { "1234", 1234 },
+                {"  1234", 1234 },
+                {"1234   ", 1234 },
                 {"   1234  ", 1234},
-                {"+1234", 1234}, 
+                {"+1234", 1234},
                 {"  -9223372036854  ", -9223372036854}
             };
 
-            foreach (var kv in validValues) {
+            foreach (var kv in validValues)
+            {
                 Assert.Equal(kv.Value, kv.Key.AsInt64());
             }
         }
 
         [Fact]
-        public void Test_AsInt64_for_invalid_strings() {
-            var invalidValues = new string[] { 
+        public void Test_AsInt64_for_invalid_strings()
+        {
+            var invalidValues = new string[] {
                 null, "1,000", "  1234.", "1234.32   ", "   $9223372036854  "
             };
 
-            foreach (var value in invalidValues) {
+            foreach (var value in invalidValues)
+            {
                 Assert.Null(value.AsInt64());
             }
         }
 
         [Fact]
-        public void Test_AsInt64_with_NumberStyles_for_valid_strings() {
-            var validValues = new Tuple<string, NumberStyles, long>[]{ 
-                new Tuple<string, NumberStyles, long>("123.0", NumberStyles.AllowDecimalPoint, 
+        public void Test_AsInt64_with_NumberStyles_for_valid_strings()
+        {
+            var validValues = new Tuple<string, NumberStyles, long>[]{
+                new Tuple<string, NumberStyles, long>("123.0", NumberStyles.AllowDecimalPoint,
                     123),
-                new Tuple<string, NumberStyles, long>("$123", NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, long>("$123", NumberStyles.AllowCurrencySymbol,
                     123),
-                new Tuple<string, NumberStyles, long>("$9223372036854.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, long>("$9223372036854.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol,
                     9223372036854),
             };
 
-            foreach (var value in validValues) {
+            foreach (var value in validValues)
+            {
                 Assert.Equal(value.Item3, value.Item1.AsInt64(value.Item2));
             }
         }
 
         [Fact]
-        public void Test_AsInt64_with_NumberStyles_for_invalid_strings() {
-            var invalidValues = new Dictionary<string, NumberStyles> { 
+        public void Test_AsInt64_with_NumberStyles_for_invalid_strings()
+        {
+            var invalidValues = new Dictionary<string, NumberStyles> {
                 { "$123.0", NumberStyles.AllowDecimalPoint },
                 { "123.0", NumberStyles.AllowCurrencySymbol },
                 { "+9223372036854.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol }
@@ -386,13 +427,15 @@
             Assert.Null(nullString.AsInt64(NumberStyles.AllowDecimalPoint));
 
 
-            foreach (var kv in invalidValues) {
+            foreach (var kv in invalidValues)
+            {
                 Assert.Null(kv.Key.AsInt64(kv.Value));
             }
         }
 
         [Fact]
-        public void Test_ToDouble_for_null_string() {
+        public void Test_ToDouble_for_null_string()
+        {
             string nullString = null;
             var ex = Assert.Throws<ArgumentNullException>(() => nullString.ToDouble());
 
@@ -400,36 +443,42 @@
         }
 
         [Fact]
-        public void Test_ToDouble_for_valid_strings() {
-            var validValues = new Dictionary<string, double>() { 
-                { "1234.25", 1234.25 }, 
-                {"  1234.25", 1234.25 }, 
-                {"1234.25   ", 1234.25 }, 
+        public void Test_ToDouble_for_valid_strings()
+        {
+            var validValues = new Dictionary<string, double>() {
+                { "1234.25", 1234.25 },
+                {"  1234.25", 1234.25 },
+                {"1234.25   ", 1234.25 },
                 {"   1234.25  ", 1234.25},
-                {"+1234.25", 1234.25}, 
+                {"+1234.25", 1234.25},
                 {"  -1234.25  ", -1234.25}
             };
 
-            foreach (var kv in validValues) {
+            foreach (var kv in validValues)
+            {
                 Assert.Equal(kv.Value, kv.Key.ToDouble());
             }
         }
 
         [Fact]
-        public void Test_ToDouble_for_invalid_strings() {
-            var invalidValues = new string[] { 
+        public void Test_ToDouble_for_invalid_strings()
+        {
+            var invalidValues = new string[] {
                 "1,..,000", "  1234..", "1234.32.00   ", "   $1234  "
             };
 
-            foreach (var value in invalidValues) {
-                Assert.Throws<FormatException>(() => {
+            foreach (var value in invalidValues)
+            {
+                Assert.Throws<FormatException>(() =>
+                {
                     value.ToDouble();
                 });
             }
         }
 
         [Fact]
-        public void Test_ToDouble_with_NumberStyles_for_null_string() {
+        public void Test_ToDouble_with_NumberStyles_for_null_string()
+        {
             string nullString = null;
             var ex = Assert.Throws<ArgumentNullException>(() => nullString.ToDouble(NumberStyles.AllowDecimalPoint));
 
@@ -437,82 +486,94 @@
         }
 
         [Fact]
-        public void Test_ToDouble_with_NumberStyles_for_valid_strings() {
-            var validValues = new Tuple<string, NumberStyles, double>[]{ 
-                new Tuple<string, NumberStyles, double>("123.25", NumberStyles.AllowDecimalPoint, 
+        public void Test_ToDouble_with_NumberStyles_for_valid_strings()
+        {
+            var validValues = new Tuple<string, NumberStyles, double>[]{
+                new Tuple<string, NumberStyles, double>("123.25", NumberStyles.AllowDecimalPoint,
                     123.25),
-                new Tuple<string, NumberStyles, double>("$123", NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, double>("$123", NumberStyles.AllowCurrencySymbol,
                     123),
-                new Tuple<string, NumberStyles, double>("$123.25", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, double>("$123.25", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol,
                     123.25),
             };
 
-            foreach (var value in validValues) {
+            foreach (var value in validValues)
+            {
                 Assert.Equal(value.Item3, value.Item1.ToDouble(value.Item2));
             }
         }
 
         [Fact]
-        public void Test_ToDouble_with_NumberStyles_for_invalid_strings() {
-            var invalidValues = new Dictionary<string, NumberStyles> { 
+        public void Test_ToDouble_with_NumberStyles_for_invalid_strings()
+        {
+            var invalidValues = new Dictionary<string, NumberStyles> {
                 { "$123", NumberStyles.AllowDecimalPoint },
                 { "123.25", NumberStyles.AllowCurrencySymbol },
                 { "+123.25", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol }
             };
 
-            foreach (var kv in invalidValues) {
-                Assert.Throws<FormatException>(() => {
+            foreach (var kv in invalidValues)
+            {
+                Assert.Throws<FormatException>(() =>
+                {
                     kv.Key.ToDouble(kv.Value);
                 });
             }
         }
 
         [Fact]
-        public void Test_AsDouble_for_valid_strings() {
-            var validValues = new Dictionary<string, double>() { 
-                { "1234.25", 1234.25 }, 
-                {"  1234.25", 1234.25 }, 
-                {"1234.25   ", 1234.25 }, 
+        public void Test_AsDouble_for_valid_strings()
+        {
+            var validValues = new Dictionary<string, double>() {
+                { "1234.25", 1234.25 },
+                {"  1234.25", 1234.25 },
+                {"1234.25   ", 1234.25 },
                 {"   1234.25  ", 1234.25},
-                {"+1234.25", 1234.25}, 
+                {"+1234.25", 1234.25},
                 {"  -1234.25  ", -1234.25}
             };
 
-            foreach (var kv in validValues) {
+            foreach (var kv in validValues)
+            {
                 Assert.Equal(kv.Value, kv.Key.AsDouble());
             }
         }
 
         [Fact]
-        public void Test_AsDouble_for_invalid_strings() {
-            var invalidValues = new string[] { 
+        public void Test_AsDouble_for_invalid_strings()
+        {
+            var invalidValues = new string[] {
                 null, "1,..,000", "  1234..", "1234.32.00   ", "   $1234  "
             };
 
-            foreach (var value in invalidValues) {
+            foreach (var value in invalidValues)
+            {
                 Assert.Null(value.AsDouble());
             }
         }
 
         [Fact]
-        public void Test_AsDouble_with_NumberStyles_for_valid_strings() {
-            var validValues = new Tuple<string, NumberStyles, double>[]{ 
-                new Tuple<string, NumberStyles, double>("123.0", NumberStyles.AllowDecimalPoint, 
+        public void Test_AsDouble_with_NumberStyles_for_valid_strings()
+        {
+            var validValues = new Tuple<string, NumberStyles, double>[]{
+                new Tuple<string, NumberStyles, double>("123.0", NumberStyles.AllowDecimalPoint,
                     123),
-                new Tuple<string, NumberStyles, double>("$123", NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, double>("$123", NumberStyles.AllowCurrencySymbol,
                     123),
-                new Tuple<string, NumberStyles, double>("$9223372036854.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, double>("$9223372036854.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol,
                     9223372036854),
             };
 
-            foreach (var value in validValues) {
+            foreach (var value in validValues)
+            {
                 Assert.Equal(value.Item3, value.Item1.AsDouble(value.Item2));
             }
         }
 
         [Fact]
-        public void Test_AsDouble_with_NumberStyles_for_invalid_strings() {
-            var invalidValues = new Dictionary<string, NumberStyles> { 
+        public void Test_AsDouble_with_NumberStyles_for_invalid_strings()
+        {
+            var invalidValues = new Dictionary<string, NumberStyles> {
                 { "$123", NumberStyles.AllowDecimalPoint },
                 { "123.25", NumberStyles.AllowCurrencySymbol },
                 { "+123.25", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol }
@@ -521,13 +582,15 @@
             string nullString = null;
             Assert.Null(nullString.AsDouble(NumberStyles.AllowDecimalPoint));
 
-            foreach (var kv in invalidValues) {
+            foreach (var kv in invalidValues)
+            {
                 Assert.Null(kv.Key.AsDouble(kv.Value));
             }
         }
 
         [Fact]
-        public void Test_ToDecimal_for_null_string() {
+        public void Test_ToDecimal_for_null_string()
+        {
             string nullString = null;
             var ex = Assert.Throws<ArgumentNullException>(() => nullString.ToDecimal());
 
@@ -535,36 +598,42 @@
         }
 
         [Fact]
-        public void Test_ToDecimal_for_valid_strings() {
-            var validValues = new Dictionary<string, decimal>() { 
-                { "1234.25", 1234.25m }, 
-                {"  1234.25", 1234.25m }, 
-                {"1234.25   ", 1234.25m }, 
+        public void Test_ToDecimal_for_valid_strings()
+        {
+            var validValues = new Dictionary<string, decimal>() {
+                { "1234.25", 1234.25m },
+                {"  1234.25", 1234.25m },
+                {"1234.25   ", 1234.25m },
                 {"   1234.25  ", 1234.25m},
-                {"+1234.25", 1234.25m}, 
+                {"+1234.25", 1234.25m},
                 {"  -1234.25  ", -1234.25m}
             };
 
-            foreach (var kv in validValues) {
+            foreach (var kv in validValues)
+            {
                 Assert.Equal(kv.Value, kv.Key.ToDecimal());
             }
         }
 
         [Fact]
-        public void Test_ToDecimal_for_invalid_strings() {
-            var invalidValues = new string[] { 
+        public void Test_ToDecimal_for_invalid_strings()
+        {
+            var invalidValues = new string[] {
                 "1,..,000", "  1234..", "1234.32.00   ", "   $1234  "
             };
 
-            foreach (var value in invalidValues) {
-                Assert.Throws<FormatException>(() => {
+            foreach (var value in invalidValues)
+            {
+                Assert.Throws<FormatException>(() =>
+                {
                     value.ToDecimal();
                 });
             }
         }
 
         [Fact]
-        public void Test_ToDecimal_with_NumberStyles_for_null_string() {
+        public void Test_ToDecimal_with_NumberStyles_for_null_string()
+        {
             string nullString = null;
             var ex = Assert.Throws<ArgumentNullException>(() => nullString.ToDecimal(NumberStyles.AllowDecimalPoint));
 
@@ -572,82 +641,94 @@
         }
 
         [Fact]
-        public void Test_ToDecimal_with_NumberStyles_for_valid_strings() {
-            var validValues = new Tuple<string, NumberStyles, decimal>[]{ 
-                new Tuple<string, NumberStyles, decimal>("123.25", NumberStyles.AllowDecimalPoint, 
+        public void Test_ToDecimal_with_NumberStyles_for_valid_strings()
+        {
+            var validValues = new Tuple<string, NumberStyles, decimal>[]{
+                new Tuple<string, NumberStyles, decimal>("123.25", NumberStyles.AllowDecimalPoint,
                     123.25m),
-                new Tuple<string, NumberStyles, decimal>("$123", NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, decimal>("$123", NumberStyles.AllowCurrencySymbol,
                     123m),
-                new Tuple<string, NumberStyles, decimal>("$123.25", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, decimal>("$123.25", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol,
                     123.25m),
             };
 
-            foreach (var value in validValues) {
+            foreach (var value in validValues)
+            {
                 Assert.Equal(value.Item3, value.Item1.ToDecimal(value.Item2));
             }
         }
 
         [Fact]
-        public void Test_ToDecimal_with_NumberStyles_for_invalid_strings() {
-            var invalidValues = new Dictionary<string, NumberStyles> { 
+        public void Test_ToDecimal_with_NumberStyles_for_invalid_strings()
+        {
+            var invalidValues = new Dictionary<string, NumberStyles> {
                 { "$123", NumberStyles.AllowDecimalPoint },
                 { "123.25", NumberStyles.AllowCurrencySymbol },
                 { "+123.25", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol }
             };
 
-            foreach (var kv in invalidValues) {
-                Assert.Throws<FormatException>(() => {
+            foreach (var kv in invalidValues)
+            {
+                Assert.Throws<FormatException>(() =>
+                {
                     kv.Key.ToDecimal(kv.Value);
                 });
             }
         }
 
         [Fact]
-        public void Test_AsDecimal_for_valid_strings() {
-            var validValues = new Dictionary<string, decimal>() { 
-                { "1234.25", 1234.25m }, 
-                {"  1234.25", 1234.25m }, 
-                {"1234.25   ", 1234.25m }, 
+        public void Test_AsDecimal_for_valid_strings()
+        {
+            var validValues = new Dictionary<string, decimal>() {
+                { "1234.25", 1234.25m },
+                {"  1234.25", 1234.25m },
+                {"1234.25   ", 1234.25m },
                 {"   1234.25  ", 1234.25m},
-                {"+1234.25", 1234.25m}, 
+                {"+1234.25", 1234.25m},
                 {"  -1234.25  ", -1234.25m}
             };
 
-            foreach (var kv in validValues) {
+            foreach (var kv in validValues)
+            {
                 Assert.Equal(kv.Value, kv.Key.AsDecimal());
             }
         }
 
         [Fact]
-        public void Test_AsDecimal_for_invalid_strings() {
-            var invalidValues = new string[] { 
+        public void Test_AsDecimal_for_invalid_strings()
+        {
+            var invalidValues = new string[] {
                 null, "1,..,000", "  1234..", "1234.32.00   ", "   $1234  "
             };
 
-            foreach (var value in invalidValues) {
+            foreach (var value in invalidValues)
+            {
                 Assert.Null(value.AsDecimal());
             }
         }
 
         [Fact]
-        public void Test_AsDecimal_with_NumberStyles_for_valid_strings() {
-            var validValues = new Tuple<string, NumberStyles, decimal>[]{ 
-                new Tuple<string, NumberStyles, decimal>("123.0", NumberStyles.AllowDecimalPoint, 
+        public void Test_AsDecimal_with_NumberStyles_for_valid_strings()
+        {
+            var validValues = new Tuple<string, NumberStyles, decimal>[]{
+                new Tuple<string, NumberStyles, decimal>("123.0", NumberStyles.AllowDecimalPoint,
                     123),
-                new Tuple<string, NumberStyles, decimal>("$123", NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, decimal>("$123", NumberStyles.AllowCurrencySymbol,
                     123),
-                new Tuple<string, NumberStyles, decimal>("$9223372036854.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol, 
+                new Tuple<string, NumberStyles, decimal>("$9223372036854.0", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol,
                     9223372036854),
             };
 
-            foreach (var value in validValues) {
+            foreach (var value in validValues)
+            {
                 Assert.Equal(value.Item3, value.Item1.AsDecimal(value.Item2));
             }
         }
 
         [Fact]
-        public void Test_AsDecimal_with_NumberStyles_for_invalid_strings() {
-            var invalidValues = new Dictionary<string, NumberStyles> { 
+        public void Test_AsDecimal_with_NumberStyles_for_invalid_strings()
+        {
+            var invalidValues = new Dictionary<string, NumberStyles> {
                 { "$123", NumberStyles.AllowDecimalPoint },
                 { "123.25", NumberStyles.AllowCurrencySymbol },
                 { "+123.25", NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol }
@@ -656,7 +737,8 @@
             string nullString = null;
             Assert.Null(nullString.AsDecimal(NumberStyles.AllowDecimalPoint));
 
-            foreach (var kv in invalidValues) {
+            foreach (var kv in invalidValues)
+            {
                 Assert.Null(kv.Key.AsDecimal(kv.Value));
             }
         }
