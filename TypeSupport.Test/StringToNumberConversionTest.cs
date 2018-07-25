@@ -5,70 +5,119 @@
     using Xunit;
 
     public class StringToNumberConversionTest {
+
+        #region IsNumber tests
+
+        private readonly string point = NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
+
         [Fact]
         public void Test_IsNumber_with_null() {
             string nullString = null;
-            var ex = Assert.Throws<ArgumentNullException>(() => nullString.IsNumber());
 
-            Assert.Equal(ex.ParamName, "source");
+            Assert.Equal(false, nullString.IsNumber());
         }
 
         [Fact]
-        public void Test_IsNumber_for_valid_strings() {
-            var validValues = new string[] { 
-                "1234", "  1234", "1234   ", "   1234  ",
-                "123.34", "+2134", "+23.343", " 1,000", 
-                "-23,000"
+        public void Test_IsNumber_for_valid_strings()
+        {
+            
+            var validValues = new string[] 
+            {
+                int.MaxValue.ToString(),
+                int.MinValue.ToString(),
+
+                uint.MaxValue.ToString(),
+                uint.MinValue.ToString(),
+
+                ulong.MaxValue.ToString(),
+                ulong.MinValue.ToString(),
+
+                decimal.MaxValue.ToString(),
+                decimal.MinValue.ToString(),
+
+                float.MaxValue.ToString(),
+                float.MinValue.ToString(),
+
+                double.MaxValue.ToString("r"),
+                double.MinValue.ToString("r"),
+
+                $"1{point}1e1",
+                $"1{point}1e1",
+                $"1{point}1e-1",
+                $"1{point}1e+1",
+
+                $"+1{point}1e1",
+                $"+1{point}1e1",
+                $"+1{point}1e-1",
+                $"+1{point}1e+1",
+
+                $"-1{point}1e1",
+                $"-1{point}1e1",
+                $"-1{point}1e-1",
+                $"-1{point}1e+1",
             };
 
-            foreach (var value in validValues) {
-                Assert.True(value.IsNumber(), string.Format("'{0}' should be valid number but now it is not.", value));
-            }
+            foreach (var value in validValues) 
+                Assert.True(value.IsNumber(), string.Format($"'{value}' should be valid number but it is not"));
+            
         }
 
         [Fact]
-        public void Test_IsNumber_for_invalid_strings() {
-            var invalidValues = new string[] { 
-                "1234sfds", "  1234...", "1234.3243.   ", "   $1234  ",
-                "123.34.0", "-+2134", "++23.343", " 1,000,a", 
-                "-23,000,.."
+        public void Test_IsNumber_for_invalid_strings()
+        {
+            var invalidValues = new string[] {
+                null as string,
+                string.Empty,
+                " ",
+
+                "1234sfds",
+                " 234",
+                $"1234{point}3243{point}",
+                "$1234",
+                $"12{point}34{point}0",
+                "-+2134",
+                "++23{point}343",
+                $"1{point}000{point}a",
+
+                $"1{point}797693134862329E+308"
             };
 
-            foreach (var value in invalidValues) {
-                Assert.False(value.IsNumber(), string.Format("'{0}' should NOT be valid number but now it is.", value));
-            }
+            foreach (var value in invalidValues)
+                Assert.False(value.IsNumber(), $"'{value}' should NOT be valid number but it is");
+
         }
 
         [Fact]
-        public void Test_IsNumber_with_NumberStyles_for_null_string() {
-            string nullString = null;
-            var ex = Assert.Throws<ArgumentNullException>(() => nullString.IsNumber(NumberStyles.Integer));
-
-            Assert.Equal(ex.ParamName, "source");
-        }
-
-        [Fact]
-        public void Test_IsNumber_with_NumberStyles_for_valid_strings() {
-            var validValues = new string[] { 
-                "1234", "  1234", "1234   ", "   1234  ",
-                "+2134", "  -23343 "
+        public void Test_IsNumber_with_NumberStyles_for_valid_strings()
+        {
+            var validValues = new string[] {
+                "1234",
+                "+2134",
+                "-23343"
             };
 
-            foreach (var value in validValues) {
-                Assert.True(value.IsNumber(NumberStyles.Integer), string.Format("'{0}' should be valid number but now it is not.", value));
-            }
+            foreach (var value in validValues)
+                Assert.True(value.IsNumber(NumberStyles.Integer), $"'{value}' should be valid number but now it is not.");
+
         }
 
         [Fact]
-        public void Test_IsNumber_with_NumberStyles_for_invalid_strings() {
-            var invalidValues = new string[] { 
-                "1,000", "  1234.", "1234.32   ", "   $1234  "
+        public void Test_IsNumber_with_NumberStyles_for_invalid_strings()
+        {
+            var invalidValues = new string[] {
+                $"0xabc",
+                $"1000a ",
+                $"  1234{point}",
+                $"1234{point}32   ",
+                $" 1234"
             };
 
-            foreach (var value in invalidValues) {
-                Assert.False(value.IsNumber(NumberStyles.Integer), string.Format("'{0}' should NOT be valid number but now it is.", value));
-            }
+            foreach (var value in invalidValues)
+                Assert.False(value.IsNumber(NumberStyles.Integer), $"'{value}' should NOT be valid number but now it is.");
         }
+
+        #endregion
+
 
         [Fact]
         public void Test_ToInt32_for_null_string() {
@@ -89,9 +138,9 @@
                 {"  -1234  ", -1234}
             };
 
-            foreach (var kv in validValues) {
+            foreach (var kv in validValues) 
                 Assert.Equal(kv.Value, kv.Key.ToInt32());
-            }
+            
         }
 
         [Fact]
