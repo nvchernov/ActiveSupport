@@ -33,7 +33,7 @@
         }
 
         /// <summary>
-        /// Return converted <see cref="Int32"/>.
+        /// Convert string <see cref="Int32"/> 
         /// </summary>
         /// <param name="source">A <see cref="string"/> instance.</param>
         /// <param name="style">A <see cref="NumberStyles" /> to parse against <paramref name="source"/>.</param>
@@ -44,8 +44,6 @@
         /// <exception cref="ArgumentException">Throws when <paramref name="style"/> is not valid <see cref="NumberStyles"/></exception>
         public static int ToInt32(this string source, NumberStyles style = DEFAULT_NUMBER_STYLES)
         {
-            Guard.ArgumentNotNull("source", source);
-
             return int.Parse(source, style, NumberFormatInfo.CurrentInfo);
         }
 
@@ -73,8 +71,6 @@
         /// <exception cref="ArgumentException">Throws when <paramref name="style"/> is not valid <see cref="NumberStyles"/></exception>
         public static long ToInt64(this string source, NumberStyles style = DEFAULT_NUMBER_STYLES)
         {
-            Guard.ArgumentNotNull("source", source);
-
             return long.Parse(source, style, NumberFormatInfo.CurrentInfo);
         }
 
