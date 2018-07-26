@@ -262,8 +262,6 @@
         {
             string nullString = null;
             var ex = Assert.Throws<ArgumentNullException>(() => nullString.ToInt64());
-
-            Assert.Equal(ex.ParamName, "source");
         }
 
         [Fact]
@@ -303,8 +301,6 @@
         {
             string nullString = null;
             var ex = Assert.Throws<ArgumentNullException>(() => nullString.ToInt64(NumberStyles.AllowDecimalPoint));
-
-            Assert.Equal(ex.ParamName, "source");
         }
 
         [Fact]
