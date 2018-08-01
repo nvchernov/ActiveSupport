@@ -1,82 +1,98 @@
-﻿namespace TypeSupport.Test {
+﻿namespace TypeSupport.Test
+{
     using System;
     using System.Globalization;
     using Xunit;
 
-    public class DateTimeCalculationsTest {
+    public class DateTimeCalculationsTest
+    {
         [Fact]
-        public void Test_Tomorrow() {
+        public void Test_Tomorrow()
+        {
             Assert.Equal(new DateTime(2010, 6, 15), new DateTime(2010, 6, 14).Tomorrow());
             Assert.Equal(new DateTime(2010, 6, 1), new DateTime(2010, 5, 31).Tomorrow()); // between months
             Assert.Equal(new DateTime(2011, 1, 1), new DateTime(2010, 12, 31).Tomorrow()); // between years
         }
 
         [Fact]
-        public void Test_Yesterday() {
+        public void Test_Yesterday()
+        {
             Assert.Equal(new DateTime(2010, 6, 13), new DateTime(2010, 6, 14).Yesterday());
             Assert.Equal(new DateTime(2010, 5, 31), new DateTime(2010, 6, 1).Yesterday()); // between months
             Assert.Equal(new DateTime(2010, 12, 31), new DateTime(2011, 1, 1).Yesterday()); // between years
         }
 
         [Fact]
-        public void Test_NextYear() {
+        public void Test_NextYear()
+        {
             Assert.Equal(new DateTime(2011, 1, 14), new DateTime(2010, 1, 14).NextYear());
         }
 
         [Fact]
-        public void Test_PreviousYear() {
+        public void Test_PreviousYear()
+        {
             Assert.Equal(new DateTime(2009, 1, 14), new DateTime(2010, 1, 14).PreviousYear());
         }
 
         [Fact]
-        public void Test_NextMonth() {
+        public void Test_NextMonth()
+        {
             Assert.Equal(new DateTime(2010, 2, 14), new DateTime(2010, 1, 14).NextMonth());
             Assert.Equal(new DateTime(2011, 1, 14), new DateTime(2010, 12, 14).NextMonth()); // between years
         }
 
         [Fact]
-        public void Test_PreviousMonth() {
+        public void Test_PreviousMonth()
+        {
             Assert.Equal(new DateTime(2010, 1, 14), new DateTime(2010, 2, 14).PreviousMonth());
             Assert.Equal(new DateTime(2009, 12, 14), new DateTime(2010, 1, 14).PreviousMonth()); // between years
         }
 
         [Fact]
-        public void Test_BeginningOfDay() {
+        public void Test_BeginningOfDay()
+        {
             Assert.Equal(new DateTime(2011, 6, 14, 0, 0, 0), new DateTime(2011, 6, 14, 10, 0, 0).BeginningOfDay());
         }
 
         [Fact]
-        public void Test_Midnight() {
+        public void Test_Midnight()
+        {
             Assert.Equal(new DateTime(2011, 6, 14, 0, 0, 0), new DateTime(2011, 6, 14, 10, 0, 0).Midnight());
         }
 
         [Fact]
-        public void Test_EndOfDay() {
+        public void Test_EndOfDay()
+        {
             Assert.Equal(new DateTime(2011, 6, 14, 23, 59, 59), new DateTime(2011, 6, 14, 10, 0, 0).EndOfDay());
         }
 
         [Fact]
-        public void Test_BeginningOfMonth() {
+        public void Test_BeginningOfMonth()
+        {
             Assert.Equal(new DateTime(2011, 6, 1, 0, 0, 0), new DateTime(2011, 6, 14, 10, 0, 0).BeginningOfMonth());
         }
 
         [Fact]
-        public void Test_EndOfMonth() {
+        public void Test_EndOfMonth()
+        {
             Assert.Equal(new DateTime(2011, 6, 30, 23, 59, 59), new DateTime(2011, 6, 14, 10, 0, 0).EndOfMonth());
         }
 
         [Fact]
-        public void Test_BeginningOfYear() {
+        public void Test_BeginningOfYear()
+        {
             Assert.Equal(new DateTime(2011, 1, 1, 0, 0, 0), new DateTime(2011, 6, 14, 10, 0, 0).BeginningOfYear());
         }
 
         [Fact]
-        public void Test_EndOfYear() {
+        public void Test_EndOfYear()
+        {
             Assert.Equal(new DateTime(2011, 12, 31, 23, 59, 59), new DateTime(2011, 6, 14, 10, 0, 0).EndOfYear());
         }
 
         [Fact]
-        public void Test_BeginningOfWeek() {
+        public void Test_BeginningOfWeek()
+        {
 
             if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Monday)
                 Assert.Equal(new DateTime(2011, 6, 13, 0, 0, 0), new DateTime(2011, 6, 14, 10, 0, 0).BeginningOfWeek());
@@ -87,7 +103,8 @@
         }
 
         [Fact]
-        public void Test_BeginningOfWeek_with_custom_FirstDayOfWeek_culture() {
+        public void Test_BeginningOfWeek_with_custom_FirstDayOfWeek_culture()
+        {
             var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
 
             var culture = new System.Globalization.CultureInfo("en-US", true);
@@ -100,7 +117,8 @@
         }
 
         [Fact]
-        public void Test_EndOfWeek() {
+        public void Test_EndOfWeek()
+        {
 
             if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Monday)
                 Assert.Equal(new DateTime(2011, 6, 19, 23, 59, 59), new DateTime(2011, 6, 14, 10, 0, 0).EndOfWeek());
@@ -111,7 +129,8 @@
         }
 
         [Fact]
-        public void Test_EndOfWeek_with_custom_FirstDayOfWeek_culture() {
+        public void Test_EndOfWeek_with_custom_FirstDayOfWeek_culture()
+        {
             var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
 
             var culture = new System.Globalization.CultureInfo("en-US", true);
@@ -124,22 +143,25 @@
         }
 
         [Fact]
-        public void Test_NextWeek() {
+        public void Test_NextWeek()
+        {
             Assert.Equal(new DateTime(2011, 6, 21, 0, 0, 0), new DateTime(2011, 6, 14, 10, 0, 0).NextWeek());
         }
 
         [Fact]
-        public void Test_NextWeek_with_day() {
+        public void Test_NextWeek_with_day()
+        {
             Assert.Equal(new DateTime(2011, 6, 23, 0, 0, 0), new DateTime(2011, 6, 14, 10, 0, 0).NextWeek(day: DayOfWeek.Thursday));
         }
 
         [Fact]
-        public void Test_BeginningOfQuarter() {
+        public void Test_BeginningOfQuarter()
+        {
             // first quarter
             Assert.Equal(new DateTime(2011, 1, 1, 0, 0, 0), new DateTime(2011, 1, 14, 10, 0, 0).BeginningOfQuarter());
             Assert.Equal(new DateTime(2011, 1, 1, 0, 0, 0), new DateTime(2011, 2, 23, 10, 0, 0).BeginningOfQuarter());
             Assert.Equal(new DateTime(2011, 1, 1, 0, 0, 0), new DateTime(2011, 3, 31, 10, 0, 0).BeginningOfQuarter());
-            
+
             // second quarter
             Assert.Equal(new DateTime(2011, 4, 1, 0, 0, 0), new DateTime(2011, 4, 14, 10, 0, 0).BeginningOfQuarter());
             Assert.Equal(new DateTime(2011, 4, 1, 0, 0, 0), new DateTime(2011, 5, 23, 10, 0, 0).BeginningOfQuarter());
@@ -157,7 +179,8 @@
         }
 
         [Fact]
-        public void Test_EndOfQuarter() {
+        public void Test_EndOfQuarter()
+        {
             // first quarter
             Assert.Equal(new DateTime(2011, 3, 31, 23, 59, 59), new DateTime(2011, 1, 14, 10, 0, 0).EndOfQuarter());
             Assert.Equal(new DateTime(2011, 3, 31, 23, 59, 59), new DateTime(2011, 2, 23, 10, 0, 0).EndOfQuarter());
@@ -180,7 +203,8 @@
         }
 
         [Fact]
-        public void Test_IsToday() {
+        public void Test_IsToday()
+        {
             Assert.Equal(true, DateTime.Now.IsToday());
             Assert.Equal(true, DateTime.Today.IsToday());
 
@@ -188,7 +212,8 @@
         }
 
         [Fact]
-        public void Test_IsFuture() {
+        public void Test_IsFuture()
+        {
             Assert.Equal(true, DateTime.Now.AddDays(1).IsFuture());
             // single test should not longer than 5 seconds
             // if test is inconsistence, need to revisit this assert
@@ -200,7 +225,8 @@
         }
 
         [Fact]
-        public void Test_IsPast() {
+        public void Test_IsPast()
+        {
             Assert.Equal(true, new DateTime(2010, 1, 1).IsPast());
             Assert.Equal(true, DateTime.Now.AddDays(-1).IsPast());
             // single test should not longer than 5 seconds
@@ -212,7 +238,8 @@
         }
 
         [Fact]
-        public void Test_Advance() {
+        public void Test_Advance()
+        {
             // with years
             Assert.Equal(new DateTime(2010, 1, 1), new DateTime(2009, 1, 1).Advance(years: 1));
 
@@ -248,7 +275,8 @@
         }
 
         [Fact]
-        public void Test_Ago() {
+        public void Test_Ago()
+        {
             // with years
             Assert.Equal(new DateTime(2010, 1, 1), new DateTime(2011, 1, 1).Ago(years: 1));
 
@@ -284,7 +312,8 @@
         }
 
         [Fact]
-        public void Test_Change() {
+        public void Test_Change()
+        {
             // with years
             Assert.Equal(new DateTime(2010, 1, 1), new DateTime(2011, 1, 1).Change(years: 2010));
 
@@ -354,7 +383,7 @@
 
             Assert.Equal(false, ints.IsBlank());
         }
-                
+
         [Fact]
         public void Test_IsBlank_default()
         {

@@ -65,7 +65,7 @@
              * https://www.codeproject.com/Articles/1014073/Fastest-method-to-remove-all-whitespace-from-Strin 
              * 
              * */
-             
+
             if (source == null)
                 return null;
 
@@ -104,8 +104,8 @@
 
             if (dstIdx > 0 && IsWhiteSpaceInternal(src[dstIdx - 1]))
                 dstIdx -= 2;
-            
-            if(IsWhiteSpaceInternal(src[0]))
+
+            if (IsWhiteSpaceInternal(src[0]))
                 return new string(src, 1, dstIdx);
             else
                 return new string(src, 0, dstIdx);

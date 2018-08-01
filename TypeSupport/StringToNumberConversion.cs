@@ -27,7 +27,7 @@
             if (source == null)
                 return false;
 
-            return 
+            return
                 double.TryParse(source, style, NumberFormatInfo.CurrentInfo, out double parseDouble) ||
                 decimal.TryParse(source, style, NumberFormatInfo.CurrentInfo, out decimal parsedDecimal);
         }

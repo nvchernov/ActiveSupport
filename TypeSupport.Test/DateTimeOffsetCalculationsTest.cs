@@ -1,93 +1,110 @@
-﻿namespace TypeSupport.Test {
+﻿namespace TypeSupport.Test
+{
     using System;
     using System.Globalization;
     using Xunit;
 
-    public class DateTimeOffsetCalculationsTest {
+    public class DateTimeOffsetCalculationsTest
+    {
         [Fact]
-        public void Test_Tomorrow() {
+        public void Test_Tomorrow()
+        {
             Assert.Equal(new DateTimeOffset(2010, 6, 15, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2010, 6, 14, 0, 0, 0, TimeSpan.Zero).Tomorrow());
             Assert.Equal(new DateTimeOffset(2010, 6, 1, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2010, 5, 31, 0, 0, 0, TimeSpan.Zero).Tomorrow()); // between months
             Assert.Equal(new DateTimeOffset(2011, 1, 1, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2010, 12, 31, 0, 0, 0, TimeSpan.Zero).Tomorrow()); // between years
         }
 
         [Fact]
-        public void Test_Yesterday() {
+        public void Test_Yesterday()
+        {
             Assert.Equal(new DateTimeOffset(2010, 6, 13, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2010, 6, 14, 0, 0, 0, TimeSpan.Zero).Yesterday());
             Assert.Equal(new DateTimeOffset(2010, 5, 31, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2010, 6, 1, 0, 0, 0, TimeSpan.Zero).Yesterday()); // between months
             Assert.Equal(new DateTimeOffset(2010, 12, 31, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 1, 1, 0, 0, 0, TimeSpan.Zero).Yesterday()); // between years
         }
 
         [Fact]
-        public void Test_NextYear() {
+        public void Test_NextYear()
+        {
             Assert.Equal(new DateTimeOffset(2011, 1, 14, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2010, 1, 14, 0, 0, 0, TimeSpan.Zero).NextYear());
         }
 
         [Fact]
-        public void Test_PreviousYear() {
+        public void Test_PreviousYear()
+        {
             Assert.Equal(new DateTimeOffset(2009, 1, 14, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2010, 1, 14, 0, 0, 0, TimeSpan.Zero).PreviousYear());
         }
 
         [Fact]
-        public void Test_NextMonth() {
+        public void Test_NextMonth()
+        {
             Assert.Equal(new DateTimeOffset(2010, 2, 14, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2010, 1, 14, 0, 0, 0, TimeSpan.Zero).NextMonth());
             Assert.Equal(new DateTimeOffset(2011, 1, 14, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2010, 12, 14, 0, 0, 0, TimeSpan.Zero).NextMonth()); // between years
         }
 
         [Fact]
-        public void Test_PreviousMonth() {
+        public void Test_PreviousMonth()
+        {
             Assert.Equal(new DateTimeOffset(2010, 1, 14, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2010, 2, 14, 0, 0, 0, TimeSpan.Zero).PreviousMonth());
             Assert.Equal(new DateTimeOffset(2009, 12, 14, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2010, 1, 14, 0, 0, 0, TimeSpan.Zero).PreviousMonth()); // between years
         }
 
         [Fact]
-        public void Test_BeginningOfDay() {
+        public void Test_BeginningOfDay()
+        {
             Assert.Equal(new DateTimeOffset(2011, 6, 14, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).BeginningOfDay());
         }
 
         [Fact]
-        public void Test_Midnight() {
+        public void Test_Midnight()
+        {
             Assert.Equal(new DateTimeOffset(2011, 6, 14, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).Midnight());
         }
 
         [Fact]
-        public void Test_EndOfDay() {
+        public void Test_EndOfDay()
+        {
             Assert.Equal(new DateTimeOffset(2011, 6, 14, 23, 59, 59, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).EndOfDay());
         }
 
         [Fact]
-        public void Test_BeginningOfMonth() {
+        public void Test_BeginningOfMonth()
+        {
             Assert.Equal(new DateTimeOffset(2011, 6, 1, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).BeginningOfMonth());
         }
 
         [Fact]
-        public void Test_EndOfMonth() {
+        public void Test_EndOfMonth()
+        {
             Assert.Equal(new DateTimeOffset(2011, 6, 30, 23, 59, 59, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).EndOfMonth());
         }
 
         [Fact]
-        public void Test_BeginningOfYear() {
+        public void Test_BeginningOfYear()
+        {
             Assert.Equal(new DateTimeOffset(2011, 1, 1, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).BeginningOfYear());
         }
 
         [Fact]
-        public void Test_EndOfYear() {
+        public void Test_EndOfYear()
+        {
             Assert.Equal(new DateTimeOffset(2011, 12, 31, 23, 59, 59, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).EndOfYear());
         }
 
         [Fact]
-        public void Test_BeginningOfWeek() {
+        public void Test_BeginningOfWeek()
+        {
 
             if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Monday)
                 Assert.Equal(new DateTimeOffset(2011, 6, 13, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).BeginningOfWeek());
             else if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Sunday)
                 Assert.Equal(new DateTimeOffset(2011, 6, 12, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).BeginningOfWeek());
             else
-                Assert.True(false);            
+                Assert.True(false);
         }
 
         [Fact]
-        public void Test_BeginningOfWeek_with_custom_FirstDayOfWeek_culture() {
+        public void Test_BeginningOfWeek_with_custom_FirstDayOfWeek_culture()
+        {
             var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
 
             var culture = new System.Globalization.CultureInfo("en-US", true);
@@ -100,7 +117,8 @@
         }
 
         [Fact]
-        public void Test_EndOfWeek() {
+        public void Test_EndOfWeek()
+        {
 
             if (CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Monday)
                 Assert.Equal(new DateTimeOffset(2011, 6, 19, 23, 59, 59, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).EndOfWeek());
@@ -111,7 +129,8 @@
         }
 
         [Fact]
-        public void Test_EndOfWeek_with_custom_FirstDayOfWeek_culture() {
+        public void Test_EndOfWeek_with_custom_FirstDayOfWeek_culture()
+        {
             var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
 
             var culture = new System.Globalization.CultureInfo("en-US", true);
@@ -124,17 +143,20 @@
         }
 
         [Fact]
-        public void Test_NextWeek() {
+        public void Test_NextWeek()
+        {
             Assert.Equal(new DateTimeOffset(2011, 6, 21, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).NextWeek());
         }
 
         [Fact]
-        public void Test_NextWeek_with_day() {
+        public void Test_NextWeek_with_day()
+        {
             Assert.Equal(new DateTimeOffset(2011, 6, 23, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 6, 14, 10, 0, 0, TimeSpan.Zero).NextWeek(day: DayOfWeek.Thursday));
         }
 
         [Fact]
-        public void Test_BeginningOfQuarter() {
+        public void Test_BeginningOfQuarter()
+        {
             // first quarter
             Assert.Equal(new DateTimeOffset(2011, 1, 1, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 1, 14, 10, 0, 0, TimeSpan.Zero).BeginningOfQuarter());
             Assert.Equal(new DateTimeOffset(2011, 1, 1, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 2, 23, 10, 0, 0, TimeSpan.Zero).BeginningOfQuarter());
@@ -157,7 +179,8 @@
         }
 
         [Fact]
-        public void Test_EndOfQuarter() {
+        public void Test_EndOfQuarter()
+        {
             // first quarter
             Assert.Equal(new DateTimeOffset(2011, 3, 31, 23, 59, 59, TimeSpan.Zero), new DateTimeOffset(2011, 1, 14, 10, 0, 0, TimeSpan.Zero).EndOfQuarter());
             Assert.Equal(new DateTimeOffset(2011, 3, 31, 23, 59, 59, TimeSpan.Zero), new DateTimeOffset(2011, 2, 23, 10, 0, 0, TimeSpan.Zero).EndOfQuarter());
@@ -180,7 +203,8 @@
         }
 
         [Fact]
-        public void Test_IsFuture() {
+        public void Test_IsFuture()
+        {
             Assert.Equal(true, DateTimeOffset.Now.AddDays(1).IsFuture());
             // single test should not longer than 5 seconds
             // if test is inconsistence, need to revisit this assert
@@ -191,7 +215,8 @@
         }
 
         [Fact]
-        public void Test_IsPast() {
+        public void Test_IsPast()
+        {
             Assert.Equal(true, new DateTimeOffset(2010, 1, 1, 0, 0, 0, TimeSpan.Zero).IsPast());
             Assert.Equal(true, DateTimeOffset.Now.AddDays(-1).IsPast());
             // single test should not longer than 5 seconds
@@ -203,7 +228,8 @@
         }
 
         [Fact]
-        public void Test_Advance() {
+        public void Test_Advance()
+        {
             // with years
             Assert.Equal(new DateTimeOffset(2010, 1, 1, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2009, 1, 1, 0, 0, 0, TimeSpan.Zero).Advance(years: 1));
 
@@ -239,7 +265,8 @@
         }
 
         [Fact]
-        public void Test_Ago() {
+        public void Test_Ago()
+        {
             // with years
             Assert.Equal(new DateTimeOffset(2010, 1, 1, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 1, 1, 0, 0, 0, TimeSpan.Zero).Ago(years: 1));
 
@@ -275,7 +302,8 @@
         }
 
         [Fact]
-        public void Test_Change() {
+        public void Test_Change()
+        {
             // with years
             Assert.Equal(new DateTimeOffset(2010, 1, 1, 0, 0, 0, TimeSpan.Zero), new DateTimeOffset(2011, 1, 1, 0, 0, 0, TimeSpan.Zero).Change(years: 2010));
 

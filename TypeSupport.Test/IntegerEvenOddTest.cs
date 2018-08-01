@@ -1,9 +1,12 @@
-﻿namespace TypeSupport.Test {
+﻿namespace TypeSupport.Test
+{
     using Xunit;
 
-    public class IntegerEvenOddTest {
+    public class IntegerEvenOddTest
+    {
         [Fact]
-        public void Test_IsOdd() {
+        public void Test_IsOdd()
+        {
             Assert.Equal(true, 1.IsOdd());
             Assert.Equal(true, 13.IsOdd());
             Assert.Equal(true, (-1).IsOdd());
@@ -15,7 +18,8 @@
         }
 
         [Fact]
-        public void Test_IsEven() {
+        public void Test_IsEven()
+        {
             Assert.Equal(false, 1.IsEven());
             Assert.Equal(false, 13.IsEven());
             Assert.Equal(false, (-1).IsEven());
@@ -27,7 +31,8 @@
         }
 
         [Fact]
-        public void Test_IsMultipleOf() {
+        public void Test_IsMultipleOf()
+        {
             Assert.Equal(true, 0.IsMultipleOf(1));
             Assert.Equal(true, 0.IsMultipleOf(2));
             Assert.Equal(true, 5.IsMultipleOf(1));

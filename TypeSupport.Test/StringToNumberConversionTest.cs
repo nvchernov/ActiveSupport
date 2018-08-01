@@ -423,7 +423,7 @@
 
             foreach (var kv in validValues)
                 Assert.Equal(kv.Value, kv.Key.ToDouble());
-            
+
         }
 
         [Fact]
