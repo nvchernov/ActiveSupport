@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayAccessTest.cs" />
+    <Compile Include="ByteArrayTest.cs" />
     <Compile Include="CollectionAccessTest.cs" />
     <Compile Include="DateTimeCalculationsTest.cs" />
     <Compile Include="DateTimeOffsetCalculationsTest.cs" />
