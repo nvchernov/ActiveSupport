@@ -12,6 +12,14 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
     <DefineConstants></DefineConstants>
   </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net40|AnyCPU'">
+    <DocumentationFile>C:\Users\Nikolay\Desktop\NSupport1\TypeSupport\TypeSupport.xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
+    <DocumentationFile>C:\Users\Nikolay\Desktop\NSupport1\TypeSupport\TypeSupport.xml</DocumentationFile>
+  </PropertyGroup>
 
 
 
