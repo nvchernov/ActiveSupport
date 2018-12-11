@@ -1,14 +1,14 @@
-# TypeSupport
+# ActiveSupport
 
 A .Net library that makes your code beautiful, explicit and simple. Goal of a project - increase readability of code.
 
 Inspired by python [philosophy](https://www.python.org/dev/peps/pep-0020/) and ActiveSupport (Ruby on Rails).
 
 ```c#
-    using TypeSupport;
+    using ActiveSupport;
 ```
 
-TypeSupport extends [DateTime](http://msdn.microsoft.com/en-us/library/system.datetime.aspx) and [DateTimeOffset](http://msdn.microsoft.com/en-us/library/system.datetimeoffset.aspx) to allow you to write as below and more:
+ActiveSupport extends [DateTime](http://msdn.microsoft.com/en-us/library/system.datetime.aspx) and [DateTimeOffset](http://msdn.microsoft.com/en-us/library/system.datetimeoffset.aspx) to allow you to write as below and more:
 
 ```c#
 	var june18 = new DateTime(2011,6,18);
