@@ -4,7 +4,7 @@
 	<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <TargetFrameworks>net40;netstandard2.0</TargetFrameworks>
     <Version>1.0.0</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Description>A .Net library that makes your code beautiful, explicit and simple. Goal of a project - increase readability of code.</Description>
     <PackageLicenseUrl>https://github.com/nvchernov/ActiveSupport/blob/master/MIT-LICENSE.txt</PackageLicenseUrl>
@@ -25,7 +25,7 @@
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net40|AnyCPU'">
-    <DocumentationFile>C:\Users\Nikolay\Desktop\NSupport1\ActiveSupport\ActiveSupport.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
