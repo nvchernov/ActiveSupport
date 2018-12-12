@@ -93,8 +93,7 @@
         public void Test_IsEmpty_with_null_collection()
         {
             int[] nullArray = null;
-
-            Assert.Equal(true, nullArray.IsEmpty());
+            Assert.Throws<ArgumentNullException>(() =>nullArray.IsEmpty());
         }
 
         [Fact]

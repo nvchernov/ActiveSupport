@@ -42,7 +42,7 @@
         /// <returns>true if the source sequence is null or contains no elements; otherwise, false.</returns>
         public static bool IsEmpty<T>(this IEnumerable<T> source)
         {
-            return source == null || !source.Any();
+            return !source.Any();
         }
 
         /// <summary>

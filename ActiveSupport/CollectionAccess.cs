@@ -21,7 +21,7 @@
         public static ICollection<T> AddRange<T>(this ICollection<T> source, IEnumerable<T> values)
         {
             Guard.ArgumentNotNull("source", source);
-            if (values.IsEmpty())
+            if (values.IsBlank())
             {
                 return source;
             }
