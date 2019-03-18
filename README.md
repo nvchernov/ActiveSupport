@@ -106,6 +106,10 @@ ActiveSupport also extends [Integer](http://msdn.microsoft.com/en-us/library/sys
 Active support methods ```blank?``` and ```present?```  that makes you code more readable
 
 ```c#
+  if(bid.Transactions?.Any() != true) // means that bid.Transaction is not null or has no items
+  // vs
+  if(bid.Transactions.Blank())
+
   if(bid.Transactions != null && bid.Transactions.Count > 0)
   // vs
   if(bid.Transactions.IsPresent())
