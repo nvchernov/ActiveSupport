@@ -209,5 +209,74 @@
             Assert.Equal(-1, ints.IndexOf(x => (int)x == 5));
         }
 
+        [Fact]
+        public void Test_Chunk_array_simple()
+        {
+            var arr = new int[101];
+
+            arr[100] = 1;
+
+            var chunks = arr.Chunk(10).ToArray();
+
+            Assert.Equal(11, chunks.Length);
+
+            Assert.Equal(1, chunks.Last().First());
+        }
+
+        [Fact]
+        public void Test_Chunk_array_no_elements()
+        {
+            var arr = new int[0];
+
+            var chunks = arr.Chunk(10).ToArray();
+
+            Assert.Equal(0, chunks.Length);
+
+        }
+
+        [Fact]
+        public void Test_Chunk_array_100_elemets_10_chunks()
+        {
+            var arr = new int[100];
+
+            var chunks = arr.Chunk(10).ToArray();
+
+            Assert.Equal(10, chunks.Length);
+
+        }
+
+        [Fact]
+        public void Test_Chunk_array_99_elemets_10_chunks()
+        {
+            var arr = new int[99];
+
+            var chunks = arr.Chunk(10).ToArray();
+
+            Assert.Equal(10, chunks.Length);
+            Assert.Equal(9, chunks.Last().Count());
+        }
+
+        [Fact]
+        public void Test_Chunk_array_89_elemets_10_chunks()
+        {
+            var arr = new int[89];
+
+            var chunks = arr.Chunk(10).ToArray();
+
+            Assert.Equal(9, chunks.Length);
+            Assert.Equal(9, chunks.Last().Count());
+        }
+
+        [Fact]
+        public void Test_Chunk_array_101_elemets_10_chunks()
+        {
+            var arr = new int[101];
+
+            var chunks = arr.Chunk(10).ToArray();
+
+            Assert.Equal(11, chunks.Length);
+            Assert.Equal(1, chunks.Last().Count());
+        }
+
     }
 }

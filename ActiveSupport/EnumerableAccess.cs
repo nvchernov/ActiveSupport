@@ -131,5 +131,26 @@
         {
             return source != null && source.GetEnumerator().MoveNext();
         }
+        
+
+        /// <summary>
+        /// Split some set by chunks where one chunk has chunkSize elements
+        /// </summary>
+        /// <typeparam name="T">Enumerable element type</typeparam>
+        /// <param name="source">Source enumerablel</param>
+        /// <param name="chunkSize">Size of chunk to split set </param>
+        /// <returns>Set of chunks</returns>
+        public static IEnumerable<IEnumerable<T>> Chunk<T>(this IEnumerable<T> source, int chunkSize)
+        {
+            if (source?.Any() != true || chunkSize <= 0)
+                yield break;
+
+            var chunksCount = Convert.ToInt32(Math.Ceiling(source.Count() / (double)chunkSize));
+
+            for (int i = 0; i < chunksCount; ++i)
+                yield return source.Skip(i * chunkSize).Take(chunkSize);
+
+        }
+
     }
 }
