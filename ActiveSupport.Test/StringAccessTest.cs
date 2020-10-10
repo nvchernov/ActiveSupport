@@ -137,5 +137,17 @@ veniam, quis nostrud exercitation ullamco
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void Test_Squish_with_whitespace_on_begining()
+        {
+
+            string actual = " How much savings can be derived from allowing another firm to manage your IT assets".Squish();
+
+            string expected = actual.TrimStart();
+
+            Assert.Equal(expected, actual);
+
+        }
+
     }
 }

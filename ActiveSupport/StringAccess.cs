@@ -103,10 +103,10 @@
             /* remove whitespaces */
 
             if (dstIdx > 0 && IsWhiteSpaceInternal(src[dstIdx - 1]))
-                dstIdx -= 2;
+                dstIdx -= 1;
 
             if (IsWhiteSpaceInternal(src[0]))
-                return new string(src, 1, dstIdx);
+                return new string(src, 1, dstIdx - 1);
             else
                 return new string(src, 0, dstIdx);
         }
