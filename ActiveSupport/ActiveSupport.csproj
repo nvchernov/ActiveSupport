@@ -29,7 +29,7 @@
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
-    <DocumentationFile>C:\Users\Nikolay\Desktop\NSupport1\ActiveSupport\ActiveSupport.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\q-cs\Source\Repos\ActiveSupport\ActiveSupport\ActiveSupport.xml</DocumentationFile>
   </PropertyGroup>
 
 

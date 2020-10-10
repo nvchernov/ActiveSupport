@@ -66,6 +66,7 @@
     <Compile Include="StringFormattingTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="QueueHandlerTest.cs" />
     <Compile Include="TimeSpanDateTimeOffsetTest.cs" />
   </ItemGroup>
   <ItemGroup>
