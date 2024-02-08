@@ -31,6 +31,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
     <DocumentationFile>C:\Users\q-cs\Source\Repos\ActiveSupport\ActiveSupport\ActiveSupport.xml</DocumentationFile>
   </PropertyGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)'=='net40'">
+    <Reference Include="System.Runtime.Caching" />
+  </ItemGroup>
 
 
 
