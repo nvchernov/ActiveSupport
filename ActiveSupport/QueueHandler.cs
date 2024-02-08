@@ -34,6 +34,23 @@ namespace ActiveSupport
         public int QueueSize { get { lock (_syncObj) return _queue.Count; } }
 
         /// <summary>
+        /// Return copy of inner queue items
+        /// </summary>
+        public IEnumerable<T> QueueItems => GetQueueItems();
+
+        private IEnumerable<T> GetQueueItems()
+        {
+            lock(_syncObj)
+            {
+                var arr = new T[_queue.Count];
+
+                _queue.CopyTo(arr, arrayIndex: 0);
+
+                return arr;
+            }
+        }
+
+        /// <summary>
         /// Queue with custom 1-thread handler
         /// It uses thread if it needed - if queue is empty, there is no thread running
         /// </summary>
