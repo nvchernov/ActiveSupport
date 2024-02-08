@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using System.Threading;
+using System.Diagnostics;
 
 namespace ActiveSupport.Test
 {
@@ -47,7 +48,10 @@ namespace ActiveSupport.Test
 
             Action addAction = () =>
             {
-                var someValue = 0;
+                // just testing QueueItems field
+                var queueItems = queueHandler.QueueItems;
+
+                var someValue = queueItems.Count();
                 for (int i = 0; i < 10; ++i)
                 {
                     queueHandler.AddItem(i.ToString());
@@ -122,7 +126,6 @@ namespace ActiveSupport.Test
         {
 
             /*
-             * first time when queue is empty thread should be removed
              * second time new thread should be created
              * 
              * this test checking this
@@ -137,23 +140,28 @@ namespace ActiveSupport.Test
                 Thread.Sleep(10);
                 result.Add(p);
 
-                if (!threadIds.Contains(Thread.CurrentThread.ManagedThreadId))
-                    threadIds.Add(Thread.CurrentThread.ManagedThreadId);
+                threadIds.Add(Thread.CurrentThread.ManagedThreadId); 
+                
+                Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
 
             });
 
-            for (int i = 0; i < 10; ++i)
+            // first time when queue is empty thread should be removed
+            for (int i = 0; i < 5; ++i)
                 queueHandler.AddItem(i.ToString());
 
             Thread.Sleep(2000);
 
-            for (int i = 0; i < 10; ++i)
+            //ThreadPool.QueueUserWorkItem((e) => Thread.Sleep(4000));
+
+            // second time new thread should be created
+            for (int i = 0; i < 5; ++i)
                 queueHandler.AddItem(i.ToString());
 
             Thread.Sleep(2000);
 
-            Assert.Equal(20, result.Count);
-            Assert.Equal(2, threadIds.Count);
+            Assert.Equal(10, result.Count);
+            Assert.Equal(2, threadIds.Distinct().Count());
 
         }
 
